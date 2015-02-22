@@ -1,0 +1,172 @@
+package
+{
+	import flash.events.Event;
+	import flash.net.URLLoader;
+	import flash.net.URLRequest;
+	
+	import net.pixelpracht.tmx.TmxMap;
+	import net.pixelpracht.tmx.TmxObject;
+	import net.pixelpracht.tmx.TmxObjectGroup;
+	
+	import org.flixel.*;
+	
+	import effects.*;
+	
+	public class TmxLevel extends FlxState
+	{
+		[Embed(source="data/map.png")] private var ImgMap:Class;
+		[Embed(source="data/tileset2.png")] private var ImgTiles:Class;
+		[Embed(source="data/bg.png")] private var ImgBG:Class;
+		[Embed(source="data/gibs.png")] private var ImgGibs:Class;
+		
+		protected var _fps:FlxText = new FlxText(1,1,1);
+		public var player:Player;
+		public var tilemap:FlxTilemap;
+		public var floortiles:FlxTilemap;
+		public var colliders:FlxGroup = new FlxGroup();
+		public var collidesWithTiles:FlxGroup = new FlxGroup();
+		public var collidesWithAll:FlxGroup = new FlxGroup();
+		
+		public var enemyList:FlxGroup = new FlxGroup();
+		public var enemyListSize:int = 50; // raise this limit if theres a type of quest that warrants it.
+		public var effectList:FlxGroup = new FlxGroup();
+		public var effectListSize:int = 50;
+		public var bulletList:FlxGroup = new FlxGroup();
+		public var bulletListSize:int = 20;
+		
+		public var hitboxList:FlxGroup = new FlxGroup();
+		public var hitboxListSize:int = 50;
+		public var drawHitBoxes:Boolean = true; 
+		
+		protected var _elevator:FlxSprite;
+		
+		override public function create():void
+		{
+			super.create();
+			loadTmxFile();
+			
+		}
+		
+		override public function update():void
+		{
+			_fps.text = FlxU.floor(1/FlxG.elapsed).toString()+"fps";
+			super.update();
+			if(FlxG.keys.justReleased("ENTER"))
+				FlxG.switchState(new TmxLevel());
+			FlxG.collide(colliders);
+			if(effectList.countLiving() > 0){
+				trace(effectList.countLiving());
+			}
+		}
+		
+		private function loadTmxFile():void
+		{
+			var loader:URLLoader = new URLLoader(); 
+			loader.addEventListener(Event.COMPLETE, onTmxLoaded); 
+			loader.load(new URLRequest('data/map02.tmx')); 
+		}
+		
+		private function onTmxLoaded(e:Event):void
+		{
+			var xml:XML = new XML(e.target.data);
+			var tmx:TmxMap = new TmxMap(xml);
+			loadStateFromTmx(tmx);
+		}
+		
+		private function loadStateFromTmx(tmx:TmxMap):void
+		{			
+			//Background
+			//FlxState.bgColor = 0xffacbcd7;
+			var decoration:FlxSprite = new FlxSprite(256,159,ImgBG);
+			decoration.moves = false;
+			decoration.solid = false;
+			add(decoration);			
+			
+			
+			//Basic level structure
+			tilemap = new FlxTilemap();
+			floortiles = new FlxTilemap();
+			//generate a CSV from the layer 'map' with all the tiles from the TileSet 'tiles'
+			var mapCsv:String = tmx.getLayer('map').toCsv(tmx.getTileSet('tiles'));
+			var floorTilesCsv:String = tmx.getLayer('floor').toCsv(tmx.getTileSet('tiles'));
+			tilemap.loadMap(mapCsv,ImgTiles, 32, 32);
+			tilemap.follow();
+			floortiles.loadMap(floorTilesCsv, ImgTiles, 32, 32);
+			add(tilemap);
+			add(floortiles);
+			
+			colliders.add(tilemap);
+			
+			//instantiate flxGroups
+			
+			for (var i:int = 0; i < enemyListSize; i++) {
+				/*
+				var newEnemy:Enemy = new Enemy(0, 0);
+				newEnemy.exists = false;
+				enemyList.add(newEnemy);
+				*/
+			}
+			
+			for (var i:int = 0; i < effectListSize; i++) {
+				var newEffect:Effect = new Effect();
+				newEffect.exists = false;
+				effectList.add(newEffect);
+			}
+			
+			for (var i:int = 0; i < bulletListSize; i++) {
+				/*
+				var newBullet:Bullet = new Bullet(0, 0);
+				newBullet.exists = false;
+				bulletList.add(newEnemy);			
+				*/
+			}
+			
+
+			
+			add(enemyList);
+			add(bulletList);
+			add(effectList);
+			add(hitboxList);
+			
+			
+			//create the flixel implementation of the objects specified in the ObjectGroup 'objects'
+			var group:TmxObjectGroup = tmx.getObjectGroup('objects');
+			for each(var object:TmxObject in group.objects)
+				spawnObject(object)
+			
+				
+			colliders.add(player);
+			
+			
+			//camera
+			FlxG.camera.follow(player, FlxCamera.STYLE_TOPDOWN_TIGHT);
+		}
+		
+		
+		private function spawnObject(obj:TmxObject):void
+		{
+			//Add game objects based on the 'type' property
+			switch(obj.type)
+			{
+				case "player":
+					player = new Player(obj.x, obj.y);
+					add(player);
+					return;
+			}
+		}
+		
+		public function createHitBox(X:int = 0, Y:int = 0, W:int = 1, H:int = 1, parity:int = 0, lifespan:int = 0, persist:Boolean = false):void {
+			var newHitBox = hitboxList.recycle(HitBox);
+			newHitBox.resetHitBox(X, Y, W, H, lifespan);
+			newHitBox.exists = true;
+			
+		}
+		
+		public function recycleEffect(img:Class = null, animated:Boolean = false, reverse:Boolean = false, frameWidth:int = 0, frameHeight:int = 0):Effect {
+			var newEffect = effectList.recycle(Effect);
+			newEffect.exists = true;
+			newEffect.loadGraphic(img, animated, reverse, frameWidth, frameHeight);
+			return newEffect;
+		}
+	}
+}
