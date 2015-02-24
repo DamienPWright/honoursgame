@@ -9,6 +9,7 @@ package {
 		public var isAttacking = false;
 		public var movespeed = 100;
 		public var weapon:Weapon;
+		public var faction:String;
 		
 		public function Actor(startX:int, startY:int) {
 			super(startX, startY);

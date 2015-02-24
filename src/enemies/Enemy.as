@@ -18,6 +18,13 @@ package enemies {
 			fsm.update();
 		}
 		
+		public function setTarget(newtarget:Actor):void {
+			target = newtarget;
+		}
+		
+		public function getTarget():Actor {
+			return target;
+		}
 		
 	}
 }

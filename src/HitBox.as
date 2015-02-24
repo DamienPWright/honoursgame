@@ -21,12 +21,22 @@ package
 			super.update();
 			
 			timeAlive++;
-			if (timeAlive >= lifeSpanInFrames) {
-				timeAlive = 0;
-				kill();
+			if(lifeSpanInFrames != 0){
+				if (timeAlive >= lifeSpanInFrames) {
+					timeAlive = 0;
+					kill();
+				}
 			}
 		}
 		
+		/**
+		 * Use to initialise a hitbox object
+		 * @param	X	The x position of the hitbox
+		 * @param	Y	The y position of the hitbox
+		 * @param	_width	The width of the hitbox in pixels
+		 * @param	_height	The height of the hitbox in pixels
+		 * @param	lifeSpan	Number of frames the hitbox will persist for. Use 0 for infinite. 
+		 */
 		public function resetHitBox(X:Number, Y:Number, _width:uint, _height:uint, lifeSpan:int=1):void {
 			reset(X, Y);
 			width = _width;
@@ -35,10 +45,24 @@ package
 			makeHitBox(drawHitbox);
 		}
 		
+		/**
+		 * Use to update the hitbox position
+		 * @param	X
+		 * @param	Y
+		 */
+		public function setHitBoxPos(X:Number, Y:Number) {
+				x = X;
+				y = Y;
+		}
+		
 		private function makeHitBox(draw:Boolean) {
 			if(draw){
 				makeGraphic(width, height, 0xffff0000);
 			}
+		}
+		
+		public function killHitBox(){
+			kill();
 		}
 	}
 }

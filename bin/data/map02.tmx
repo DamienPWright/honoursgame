@@ -3,9 +3,6 @@
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
   <image source="tileset2.png" width="640" height="640"/>
  </tileset>
- <objectgroup name="objects" width="10" height="10">
-  <object type="player" x="64" y="171"/>
- </objectgroup>
  <layer name="map" width="10" height="10">
   <data encoding="base64" compression="zlib">
    eJxjYmBgsCWAmYFYi4Ew0B5Vh1OdGBBrEsDiQAwAGWsGCw==
@@ -16,4 +13,8 @@
    eJxjYCAe2BHAyOqCgDgYDQdiUeeAxRx7POqCkMzBpy4NiFOJUEfIXpA5IWg4FYs6YsKFGAAAdKsRJQ==
   </data>
  </layer>
+ <objectgroup name="objects" width="10" height="10">
+  <object type="player" x="64" y="171"/>
+  <object name="giantslime" type="enemy" gid="3" x="216" y="191"/>
+ </objectgroup>
 </map>

@@ -1,6 +1,7 @@
 package
 {
 	import enemies.Enemy;
+	import enemies.EnemyGiantSlime;
 	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
@@ -123,11 +124,11 @@ package
 			}
 			
 			
-			
+			add(hitboxList);
 			add(enemyList);
 			add(bulletList);
 			add(effectList);
-			add(hitboxList);
+			
 			
 			
 			//create the flixel implementation of the objects specified in the ObjectGroup 'objects'
@@ -141,6 +142,12 @@ package
 				
 			colliders.add(player);
 			colliders.add(enemyList);
+			
+			
+			//give enemies a reference to the player.. think of a better way to do this later
+			//for each(var enemy:Enemy in enemyList) {
+			//	enemy.setTarget(player);
+			//}
 			
 			//camera
 			FlxG.camera.follow(player, FlxCamera.STYLE_TOPDOWN_TIGHT);
@@ -156,14 +163,30 @@ package
 					player = new Player(obj.x, obj.y);
 					add(player);
 					return;
+				case "enemy":
+					//create enemy based on type.
+					enemyList.add(spawnEnemy(obj.name, obj.x, obj.y));
+					return;
 			}
 		}
 		
-		public function createHitBox(X:int = 0, Y:int = 0, W:int = 1, H:int = 1, parity:int = 0, lifespan:int = 0, persist:Boolean = false):void {
+		public function createHitBox(X:int = 0, Y:int = 0, W:int = 1, H:int = 1, parity:int = 0, lifespan:int = 0, persist:Boolean = false):HitBox {
 			var newHitBox = hitboxList.recycle(HitBox);
 			newHitBox.resetHitBox(X, Y, W, H, lifespan);
 			newHitBox.exists = true;
+			return newHitBox;
+		}
+		
+		public function spawnEnemy(en_type:String, X:int, Y:int):Enemy {
+			var newEnemy:Enemy;
 			
+			switch(en_type) {
+				case "giantslime":
+					newEnemy = new EnemyGiantSlime(X, Y, player);
+					break;
+			}
+			
+			return newEnemy;
 		}
 		
 		public function recycleEffect(img:Class = null, animated:Boolean = false, reverse:Boolean = false, frameWidth:int = 0, frameHeight:int = 0):Effect {
@@ -173,9 +196,17 @@ package
 			return newEffect;
 		}
 		
-		public function createEnemy() {
+		public function recycleEnemy() {
 			var newEnemy = enemyList.recycle(Enemy);
 			newEnemy.exists = true;
+		}
+		
+		public function checkHitboxActorOverlap(hb:HitBox, a:Actor):Boolean {
+			return FlxG.overlap(hb, a);
+		}
+		
+		public function getPlayer():Actor {
+			return player;
 		}
 	}
 }

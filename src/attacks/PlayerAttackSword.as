@@ -69,7 +69,7 @@ package attacks {
 			effect.y = actor.y - (effect.height / 3);
 			
 			if (currentFrame == 2) {
-				(FlxG.state as TmxLevel).createHitBox(actor.x, actor.y, 32, 32);
+				(FlxG.state as TmxLevel).createHitBox(actor.x, actor.y, 32, 32, 0, 1);
 			}
 			
 			attackTimer += FlxG.elapsed;
