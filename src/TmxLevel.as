@@ -1,5 +1,6 @@
 package
 {
+	import enemies.Enemy;
 	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
@@ -121,7 +122,7 @@ package
 				*/
 			}
 			
-
+			
 			
 			add(enemyList);
 			add(bulletList);
@@ -133,10 +134,13 @@ package
 			var group:TmxObjectGroup = tmx.getObjectGroup('objects');
 			for each(var object:TmxObject in group.objects)
 				spawnObject(object)
-			
+				
+			//test enemy
+			var testEnemy = new Enemy(128, 128, player);
+			enemyList.add(testEnemy);
 				
 			colliders.add(player);
-			
+			colliders.add(enemyList);
 			
 			//camera
 			FlxG.camera.follow(player, FlxCamera.STYLE_TOPDOWN_TIGHT);
@@ -167,6 +171,11 @@ package
 			newEffect.exists = true;
 			newEffect.loadGraphic(img, animated, reverse, frameWidth, frameHeight);
 			return newEffect;
+		}
+		
+		public function createEnemy() {
+			var newEnemy = enemyList.recycle(Enemy);
+			newEnemy.exists = true;
 		}
 	}
 }
