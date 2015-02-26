@@ -34,7 +34,7 @@ package {
 		
 		override public function update():void
 		{
-			fsm.update();
+			super.update();
 		}
 	}
 }

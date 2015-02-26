@@ -10,6 +10,7 @@ package {
 		public var movespeed = 100;
 		public var weapon:Weapon;
 		public var faction:String;
+		public var spriteflash:Boolean = false;
 		
 		//lifestats
 		public var maxHp:int;
@@ -29,6 +30,28 @@ package {
 		 */
 		public function onHit(hb:HitBox):void {
 			kill();
+		}
+		
+		public override function update():void {
+			super.update();
+			fsm.update();
+		}
+		
+		/**
+		 * Process damage recieved by the actor.
+		 * 
+		 * @param	damage
+		 */
+		public function dealDamage(damage:int) {
+			curHp -= damage; //For now. Later may add some checks for damage reduction via SEs, gear etc. 
+			//consider adding a damage indicator text. Green for negative damage, red for positive damage. "Guard!" for 0 damage. 
+			
+			spriteflash = true;
+			
+			//Dead check!
+			if (curHp <= 0) {
+				//dead!
+			}
 		}
 	}
 }

@@ -16,7 +16,6 @@ package enemies {
 		
 		public override function update():void {
 			super.update();
-			fsm.update();
 		}
 		
 		public function setTarget(newtarget:Actor):void {
