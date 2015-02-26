@@ -11,41 +11,39 @@ package states {
 		}
 		
 		public function update():void {
-			self.velocity.x = 0;
-			self.velocity.y = 0;
 			var angle = 0;
+			var dir = 0;
 			var anim:String;
 			
-			if (FlxG.keys.A){
-				self.velocity.x = -self.movespeed;
+			
+			
+			if (FlxG.keys.A && FlxG.keys.W) {
+				dir = 1.25;
+			}else if (FlxG.keys.A && FlxG.keys.S)  {
+				dir = 0.75;
+			}else if (FlxG.keys.D && FlxG.keys.W)  {
+				dir = 1.75;
+			}else if (FlxG.keys.D && FlxG.keys.S)  {
+				dir = 0.25;
+			}else if (FlxG.keys.A) {
+				dir = 1;
 				self.currentFacing = FlxObject.LEFT;
-			}else if (FlxG.keys.D){
-				self.velocity.x = self.movespeed;
+			}else if (FlxG.keys.D) {
+				dir = 0;
 				self.currentFacing = FlxObject.RIGHT;
-			}
-			if (FlxG.keys.W){
-				self.velocity.y = -self.movespeed;
+			}else if (FlxG.keys.W) {
+				dir = 1.5;
 				self.currentFacing = FlxObject.UP;
-			}else if (FlxG.keys.S){
-				self.velocity.y = self.movespeed;
+			}else if (FlxG.keys.S) {
+				dir = 0.5;
 				self.currentFacing = FlxObject.DOWN;
 			}
 			
-			if (FlxG.keys.A && FlxG.keys.W) {
-				angle = 1.25 * Math.PI;
-			}else if (FlxG.keys.A && FlxG.keys.S)  {
-				angle = 0.75 * Math.PI;
-			}else if (FlxG.keys.D && FlxG.keys.W)  {
-				angle = 1.75 * Math.PI;
-			}else if (FlxG.keys.D && FlxG.keys.S)  {
-				angle = 0.25 * Math.PI;
-			}
-			if (self.velocity.x != 0 && self.velocity.y != 0) {
-				self.velocity.x = self.movespeed * Math.cos(angle);
-				self.velocity.y = self.movespeed * Math.sin(angle);
-			}
-			
-			if (self.velocity.x == 0 && self.velocity.y == 0) {
+			angle = dir * Math.PI;
+			self.velocity.x = self.movespeed * Math.cos(angle);
+			self.velocity.y = self.movespeed * Math.sin(angle);
+	
+			if (!FlxG.keys.W && !FlxG.keys.A && !FlxG.keys.S && !FlxG.keys.D) {
 				//back to idle state
 				fsm.changeState(new PlayerIdle(self))
 			}
@@ -75,7 +73,8 @@ package states {
 		}
 		
 		public function onExit():void {
-			
+			self.velocity.x = 0;
+			self.velocity.y = 0;
 		}
 		
 		public function onEnter():void {

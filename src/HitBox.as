@@ -1,14 +1,16 @@
 package  
 {
 	import org.flixel.*;
+	import attacks.Attack;
 	public class HitBox extends FlxSprite
 	{
 		private var timeAlive:int = 0;
 		private var lifeSpanInFrames:int = 0;
 		private var drawHitbox:Boolean = false;
 		private var parity:int = 0;
+		private var attack:Attack
 		
-		public function HitBox(draw:Boolean=true) 
+		public function HitBox() 
 		{
 			super(0, 0);
 			width = 1;

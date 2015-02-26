@@ -2,17 +2,10 @@ package attacks {
 	import effects.Effect;
 	import org.flixel.*;
 	
-	public class PlayerAttackSword extends FlxSprite {
-		private var actor:Actor;
-		private var actoranim:Array;
-		private var attackanim:Array;
-		private var effectanim:Array;
-		private var attackTimer:Number;
-		private var attackEndTime:Number;
-		private var attackComplete:Boolean;
-		private var effect:Effect;
+	public class PlayerAttackSword extends Attack {
 		
 		public function PlayerAttackSword(a:Actor) {
+			super(a);
 			//this class will handle the animation for a given attack
 			//A weapon will have an animation and attempt to sync up with
 			//the actor's animation.
@@ -91,6 +84,14 @@ package attacks {
 			if (attackTimer > attackEndTime) {
 				attackComplete = true;
 			}
+		}
+		
+		/**
+		 * Use this function to fire any unique "on attack" effects gear might have.
+		 * @return	Damage that was dealt by the attack
+		 */
+		public function onAttack():int {
+			return actor.attack;
 		}
 		
 		public function getAttackComplete():Boolean {

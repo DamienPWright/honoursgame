@@ -15,10 +15,16 @@ package {
 		//lifestats
 		public var maxHp:int;
 		public var curHp:int;
+		public var attack:int;
 		
 		public function Actor(startX:int, startY:int) {
 			super(startX, startY);
 			fsm = new FiniteStateMachine();
+			
+			//default values for testing
+			maxHp = 3;
+			curHp = maxHp;
+			attack = 1;
 		}
 		
 		public function getStateMachine():FiniteStateMachine {
@@ -30,6 +36,7 @@ package {
 		 */
 		public function onHit(hb:HitBox):void {
 			kill();
+			//dealDamage(hb.damage);
 		}
 		
 		public override function update():void {
@@ -51,6 +58,7 @@ package {
 			//Dead check!
 			if (curHp <= 0) {
 				//dead!
+				kill();
 			}
 		}
 	}
