@@ -69,7 +69,21 @@ package attacks {
 			effect.y = actor.y - (effect.height / 3);
 			
 			if (currentFrame == 2) {
-				(FlxG.state as TmxLevel).createHitBox(actor.x, actor.y, 32, 32, 0, 1);
+				switch((actor as Player).currentFacing) {
+					case FlxObject.UP:
+						(FlxG.state as TmxLevel).createHitBox(actor.x-32, actor.y-24, 96, 48, 2, 1);
+						break;
+					case FlxObject.DOWN:
+						(FlxG.state as TmxLevel).createHitBox(actor.x-32, actor.y+24, 96, 48, 2, 1);
+						break;
+					case FlxObject.LEFT:
+						(FlxG.state as TmxLevel).createHitBox(actor.x-24, actor.y-32, 48, 96, 2, 1);
+						break;
+					case FlxObject.RIGHT:
+						(FlxG.state as TmxLevel).createHitBox(actor.x+24, actor.y-32, 48, 96, 2, 1);
+						break;
+				}
+			
 			}
 			
 			attackTimer += FlxG.elapsed;

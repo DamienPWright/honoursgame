@@ -6,6 +6,7 @@ package
 		private var timeAlive:int = 0;
 		private var lifeSpanInFrames:int = 0;
 		private var drawHitbox:Boolean = false;
+		private var parity:int = 0;
 		
 		public function HitBox(draw:Boolean=true) 
 		{
@@ -37,10 +38,11 @@ package
 		 * @param	_height	The height of the hitbox in pixels
 		 * @param	lifeSpan	Number of frames the hitbox will persist for. Use 0 for infinite. 
 		 */
-		public function resetHitBox(X:Number, Y:Number, _width:uint, _height:uint, lifeSpan:int=1):void {
+		public function resetHitBox(X:Number, Y:Number, _width:uint, _height:uint, _parity:int = 0,lifeSpan:int=1):void {
 			reset(X, Y);
 			width = _width;
 			height = _height;
+			parity = _parity;
 			lifeSpanInFrames = lifeSpan;
 			makeHitBox(drawHitbox);
 		}
@@ -55,14 +57,32 @@ package
 				y = Y;
 		}
 		
-		private function makeHitBox(draw:Boolean) {
+		/**
+		 * Draws a hitbox if draw is set to true. Otherwise it's invisible.
+		 * @param	draw
+		 */
+		private function makeHitBox(draw:Boolean):void {
 			if(draw){
 				makeGraphic(width, height, 0xffff0000);
 			}
 		}
 		
-		public function killHitBox(){
+		public function killHitBox():void{
 			kill();
+		}
+		/**
+		 * Sets the parity of the hitbox. Determines what things the hitbox interacts with 
+		 * @param newparity		0: No target.1: Can hit player. 2: Can hit enemies. 3: Can hit all actors
+		 */
+		public function setParity(newparity:int):void {
+			parity = newparity;
+		}
+		/**
+		 * Gets the parity of the hitbox. 
+		 * 0: No target.1: Can hit player. 2: Can hit enemies. 3: Can hit all actors
+		 */
+		public function getParity():int{
+			return parity;
 		}
 	}
 }

@@ -11,6 +11,7 @@ package enemies {
 			loadGraphic(SpriteList.sprite_en_slime , true, false, 32, 32);
 			
 			fsm.changeState(new EnemyWander(this, target));
+			faction = "enemy";
 		}
 		
 		public override function update():void {

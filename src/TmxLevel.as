@@ -35,6 +35,7 @@ package
 		public var effectListSize:int = 50;
 		public var bulletList:FlxGroup = new FlxGroup();
 		public var bulletListSize:int = 20;
+		public var actorList:FlxGroup = new FlxGroup();
 		
 		public var hitboxList:FlxGroup = new FlxGroup();
 		public var hitboxListSize:int = 50;
@@ -51,14 +52,17 @@ package
 		
 		override public function update():void
 		{
-			_fps.text = FlxU.floor(1/FlxG.elapsed).toString()+"fps";
+			//_fps.text = FlxU.floor(1/FlxG.elapsed).toString()+"fps";
 			super.update();
-			if(FlxG.keys.justReleased("ENTER"))
-				FlxG.switchState(new TmxLevel());
+			//if(FlxG.keys.justReleased("ENTER"))
+			//	FlxG.switchState(new TmxLevel());
 			FlxG.collide(colliders);
+			FlxG.overlap(hitboxList, actorList, hitboxActorCollideHandler);
+			/*
 			if(effectList.countLiving() > 0){
 				trace(effectList.countLiving());
 			}
+			*/
 		}
 		
 		private function loadTmxFile():void
@@ -142,7 +146,8 @@ package
 				
 			colliders.add(player);
 			colliders.add(enemyList);
-			
+			actorList.add(player);
+			actorList.add(enemyList);
 			
 			//give enemies a reference to the player.. think of a better way to do this later
 			//for each(var enemy:Enemy in enemyList) {
@@ -172,7 +177,7 @@ package
 		
 		public function createHitBox(X:int = 0, Y:int = 0, W:int = 1, H:int = 1, parity:int = 0, lifespan:int = 0, persist:Boolean = false):HitBox {
 			var newHitBox = hitboxList.recycle(HitBox);
-			newHitBox.resetHitBox(X, Y, W, H, lifespan);
+			newHitBox.resetHitBox(X, Y, W, H, parity, lifespan);
 			newHitBox.exists = true;
 			return newHitBox;
 		}
@@ -205,8 +210,37 @@ package
 			return FlxG.overlap(hb, a);
 		}
 		
+		public function hitboxActorCollideHandler(hb:HitBox, a:Actor):void {
+			
+			var parity = hb.getParity();
+			trace(parity);
+			switch(parity) {
+				case 0:
+					break;
+				case 1:
+					if (a.faction == "player") {
+						//perform player hurt routine
+					}
+					break;
+				case 2:
+					if (a.faction == "enemy") {
+						//perform enemy hit routine
+						trace(a.faction);
+						a.onHit(hb);
+					}
+					break;
+				case 3:
+					if (a.faction == "box") {
+						//perform box breaking routine
+					}
+					break;
+				default:
+			}
+		}
+		
 		public function getPlayer():Actor {
 			return player;
 		}
+		
 	}
 }
