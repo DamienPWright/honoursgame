@@ -1,5 +1,6 @@
 package
 {
+	import attacks.Attack;
 	import enemies.Enemy;
 	import enemies.EnemyGiantSlime;
 	import flash.events.Event;
@@ -182,6 +183,14 @@ package
 			return newHitBox;
 		}
 		
+		public function createHitBoxAttack(attack:Attack, X:int = 0, Y:int = 0, W:int = 1, H:int = 1, parity:int = 0, lifespan:int = 0, persist:Boolean = false):HitBox {
+			var newHitBox = hitboxList.recycle(HitBox);
+			newHitBox.resetHitBox(X, Y, W, H, parity, lifespan);
+			newHitBox.exists = true;
+			newHitBox.setAttack(attack);
+			return newHitBox;
+		}
+		
 		public function spawnEnemy(en_type:String, X:int, Y:int):Enemy {
 			var newEnemy:Enemy;
 			
@@ -213,7 +222,7 @@ package
 		public function hitboxActorCollideHandler(hb:HitBox, a:Actor):void {
 			
 			var parity = hb.getParity();
-			trace(parity);
+			//trace(hitboxList.length);
 			switch(parity) {
 				case 0:
 					break;
@@ -225,7 +234,7 @@ package
 				case 2:
 					if (a.faction == "enemy") {
 						//perform enemy hit routine
-						trace(a.faction);
+						//trace(a.faction);
 						a.onHit(hb);
 					}
 					break;

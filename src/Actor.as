@@ -22,7 +22,7 @@ package {
 			fsm = new FiniteStateMachine();
 			
 			//default values for testing
-			maxHp = 3;
+			maxHp = 5;
 			curHp = maxHp;
 			attack = 1;
 		}
@@ -35,8 +35,10 @@ package {
 		 * @param	hb	The hitbox that collided with it.
 		 */
 		public function onHit(hb:HitBox):void {
-			kill();
-			//dealDamage(hb.damage);
+			var dmg = hb.getAttack().getDamage();
+			if (!hb.checkActorInObjectList(this)) {
+				dealDamage(dmg);
+			}
 		}
 		
 		public override function update():void {
@@ -54,7 +56,7 @@ package {
 			//consider adding a damage indicator text. Green for negative damage, red for positive damage. "Guard!" for 0 damage. 
 			
 			spriteflash = true;
-			
+			trace(damage + " damage dealt");
 			//Dead check!
 			if (curHp <= 0) {
 				//dead!

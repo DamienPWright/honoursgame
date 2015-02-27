@@ -15,8 +15,6 @@ package states {
 			var dir = 0;
 			var anim:String;
 			
-			
-			
 			if (FlxG.keys.A && FlxG.keys.W) {
 				dir = 1.25;
 			}else if (FlxG.keys.A && FlxG.keys.S)  {

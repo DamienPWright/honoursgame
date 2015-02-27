@@ -9,6 +9,7 @@ package
 		private var drawHitbox:Boolean = false;
 		private var parity:int = 0;
 		private var attack:Attack
+		private var objList:FlxGroup = new FlxGroup();
 		
 		public function HitBox() 
 		{
@@ -27,7 +28,7 @@ package
 			if(lifeSpanInFrames != 0){
 				if (timeAlive >= lifeSpanInFrames) {
 					timeAlive = 0;
-					kill();
+					killHitBox();
 				}
 			}
 		}
@@ -69,7 +70,8 @@ package
 			}
 		}
 		
-		public function killHitBox():void{
+		public function killHitBox():void {
+			purgeActorObjectList();
 			kill();
 		}
 		/**
@@ -85,6 +87,44 @@ package
 		 */
 		public function getParity():int{
 			return parity;
+		}
+		
+		public function setAttack(atk:Attack):void {
+			attack = atk;
+		}
+		/**
+		 * 
+		 * @return	Reference to attack that generated this hitbox
+		 */
+		public function getAttack():Attack {
+			return attack;
+		}
+		
+		public function addActorToObjectList(a:Actor) {
+			objList.add(a);
+		}
+		
+		public function purgeActorObjectList():void {
+			for (var i = 0; i < objList.length; i++) {
+				objList.remove(objList.members[i]);
+			}
+		}
+		
+		public function checkActorInObjectList(a:Actor):Boolean {
+			//trace(a);
+			var retb = false;
+			//trace(objList.length);
+			for (var i = 0; i < objList.length; i++) {
+				//trace("hi");
+				var b = objList.members[i];
+				if (b === a) {
+					retb = true;
+				}
+			}
+			if (!retb) {
+				addActorToObjectList(a);
+			}
+			return retb;
 		}
 	}
 }

@@ -10,11 +10,17 @@ package attacks
 		protected var effectanim:Array;
 		protected var attackTimer:Number;
 		protected var attackEndTime:Number;
+		protected var attackCurFrame:Number = 0;
+		protected var attackPrevFrame:Number = 0;
 		protected var attackComplete:Boolean;
 		protected var effect:Effect;
 		
 		public function Attack(a:Actor) 
 		{
+			
+		}
+		
+		public function attackAnimUpdate(currentFrame:Number):void {
 			
 		}
 		

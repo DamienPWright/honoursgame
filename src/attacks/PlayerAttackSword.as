@@ -38,6 +38,12 @@ package attacks {
 		override public function update():void
 		{
 			var currentFrame = Math.floor(attackTimer / 0.0333); //0.0833
+			
+			if (attackPrevFrame != currentFrame) {
+				attackAnimUpdate(currentFrame);
+				attackPrevFrame = currentFrame;
+			}
+			
 			//anim
 			switch((actor as Player).currentFacing) {
 				case FlxObject.UP:
@@ -57,27 +63,9 @@ package attacks {
 					effect.frame = effectanim[3][currentFrame];
 					break;
 			}
-			
 			effect.x = actor.x - (effect.width / 3);
 			effect.y = actor.y - (effect.height / 3);
 			
-			if (currentFrame == 2) {
-				switch((actor as Player).currentFacing) {
-					case FlxObject.UP:
-						(FlxG.state as TmxLevel).createHitBox(actor.x-32, actor.y-24, 96, 48, 2, 1);
-						break;
-					case FlxObject.DOWN:
-						(FlxG.state as TmxLevel).createHitBox(actor.x-32, actor.y+24, 96, 48, 2, 1);
-						break;
-					case FlxObject.LEFT:
-						(FlxG.state as TmxLevel).createHitBox(actor.x-24, actor.y-32, 48, 96, 2, 1);
-						break;
-					case FlxObject.RIGHT:
-						(FlxG.state as TmxLevel).createHitBox(actor.x+24, actor.y-32, 48, 96, 2, 1);
-						break;
-				}
-			
-			}
 			
 			attackTimer += FlxG.elapsed;
 			
@@ -86,11 +74,34 @@ package attacks {
 			}
 		}
 		
+		override public function attackAnimUpdate(currentFrame:Number):void {
+			
+			
+			
+			
+			if (currentFrame == 2) {
+				switch((actor as Player).currentFacing) {
+					case FlxObject.UP:
+						(FlxG.state as TmxLevel).createHitBoxAttack(this, actor.x-32, actor.y-24, 96, 48, 2, 1);
+						break;
+					case FlxObject.DOWN:
+						(FlxG.state as TmxLevel)..createHitBoxAttack(this, actor.x-32, actor.y+24, 96, 48, 2, 1);
+						break;
+					case FlxObject.LEFT:
+						(FlxG.state as TmxLevel)..createHitBoxAttack(this, actor.x-24, actor.y-32, 48, 96, 2, 1);
+						break;
+					case FlxObject.RIGHT:
+						(FlxG.state as TmxLevel)..createHitBoxAttack(this, actor.x+24, actor.y-32, 48, 96, 2, 1);
+						break;
+				}
+				
+			}
+		}
 		/**
 		 * Use this function to fire any unique "on attack" effects gear might have.
 		 * @return	Damage that was dealt by the attack
 		 */
-		public function onAttack():int {
+		override public function getDamage():int {
 			return actor.attack;
 		}
 		
@@ -100,6 +111,8 @@ package attacks {
 		
 		public function resetAnims():void {
 			attackTimer = 0;
+			attackCurFrame = 0;
+			attackPrevFrame = 0;
 			attackComplete = false;
 			//generate effect
 			effect = (FlxG.state as TmxLevel).recycleEffect(SpriteList.sprite_eff_sword_slash, true, false, 96, 96);
