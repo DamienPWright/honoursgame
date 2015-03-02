@@ -8,7 +8,7 @@ package enemies {
 			super(X, Y);
 			target = t;
 			movespeed = 25;
-			loadGraphic(SpriteList.sprite_en_slime , true, false, 32, 32);
+			loadGraphic(SpriteList.sprite_en_giantslime , true, false, 32, 32);
 			
 			fsm.changeState(new EnemyWander(this, target));
 			faction = "enemy";

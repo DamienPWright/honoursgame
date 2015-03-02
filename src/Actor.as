@@ -39,6 +39,7 @@ package {
 			if (!hb.checkActorInObjectList(this)) {
 				dealDamage(dmg);
 			}
+			flicker(0.2);
 		}
 		
 		public override function update():void {

@@ -31,7 +31,7 @@ package states {
 			self.play(anim);
 			
 			//attack
-			if (FlxG.keys.SHIFT) {
+			if (FlxG.keys.SPACE) {
 				//attackanim
 				fsm.changeState(new PlayerAttack(self))
 			}

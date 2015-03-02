@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="10" height="10" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" width="12" height="12" tilewidth="32" tileheight="32">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
   <image source="tileset2.png" width="640" height="640"/>
  </tileset>
- <layer name="map" width="10" height="10">
+ <tileset firstgid="401" name="ActorRep" tilewidth="32" tileheight="32">
+  <image source="../../src/assets/img/door.png" width="64" height="32"/>
+ </tileset>
+ <layer name="map" width="12" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYmBgsCWAmYFYi4Ew0B5Vh1OdGBBrEsDiQAwAGWsGCw==
+   eJxjYCAdMAGxLRpmQOMzI6nXIsJM7VH1NFMvBsSaBLA4EWZiAwDGYgXO
   </data>
  </layer>
- <layer name="floor" width="10" height="10">
+ <layer name="floor" width="12" height="12">
   <data encoding="base64" compression="zlib">
-   eJxjYCAe2BHAyOqCgDgYDQdiUeeAxRx7POqCkMzBpy4NiFOJUEfIXpA5IWg4FYs6YsKFGAAAdKsRJQ==
+   eJxjZGBgYCQRYwN2WMSQ1dsRwNjUBwFxMBoOxKPeAYu59kSoD0Iylxj1aUCcSoJ6Yt0DMjcEDafiUU9KeBIDSE0HIAwAAfwRjw==
   </data>
  </layer>
- <objectgroup name="objects" width="10" height="10">
-  <object type="player" x="64" y="171"/>
-  <object name="giantslime" type="enemy" gid="3" x="216" y="191"/>
+ <objectgroup name="objects" width="12" height="12">
+  <object type="player" x="96" y="203"/>
+  <object name="giantslime" type="enemy" gid="3" x="248" y="223"/>
+  <object type="door" gid="401" x="192" y="64"/>
+  <object name="slime" type="enemy" gid="2" x="102" y="128"/>
+  <object name="slime" type="enemy" gid="2" x="258" y="123"/>
+  <object name="slime" type="enemy" gid="2" x="177" y="301"/>
  </objectgroup>
 </map>

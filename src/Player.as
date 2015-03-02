@@ -12,7 +12,13 @@ package {
 			maxVelocity.x = movespeed;
 			maxVelocity.y = movespeed;
 			
+
+			
 			loadGraphic(SpriteList.sprite_player, true, false, 32, 32);
+			
+			width = 20;
+			height = 32;
+			offset.x = 6;
 			
 			addAnimation("idle_north", [3], 4, false); 
 			addAnimation("idle_south", [0], 4, false); 

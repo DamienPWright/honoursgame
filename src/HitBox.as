@@ -67,6 +67,8 @@ package
 		private function makeHitBox(draw:Boolean):void {
 			if(draw){
 				makeGraphic(width, height, 0xffff0000);
+			}else {
+				makeGraphic(width, height, 0x00000000);
 			}
 		}
 		

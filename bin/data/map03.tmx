@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="12" height="32" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
+  <image source="tileset2.png" width="640" height="640"/>
+ </tileset>
+ <tileset firstgid="401" name="ActorRep" tilewidth="32" tileheight="32">
+  <image source="../../src/assets/img/door.png" width="64" height="32"/>
+ </tileset>
+ <layer name="map" width="12" height="32">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAdMAGxLRpmQOMzI6nXIsJM7VH1YMAKxJpQzEaEelqLSzIg4lSKCPW4AD3VizEgwhAZ4wpPXABX+AxW9ej5Eld8YTMPHYyqH3zqcaVrEBbHYxY+AACOaA88
+  </data>
+ </layer>
+ <layer name="floor" width="12" height="32">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAOsCNCHobTgDgEiFOh/CAC6tGxwxBRD/JXMBoOxKMem7j9EFIPi1dknIpHPSnhiR6OhMITF8Dl/pGqHj3sQerTSFSPL++Tqh5b+iHFfLthrp7aAADTviiX
+  </data>
+ </layer>
+ <objectgroup name="objects" width="12" height="32">
+  <object type="player" x="239" y="917"/>
+  <object name="giantslime" type="enemy" gid="3" x="176" y="184"/>
+  <object type="door" gid="401" x="192" y="64"/>
+  <object name="giantslime" type="enemy" gid="3" x="236" y="726"/>
+  <object name="giantslime" type="enemy" gid="3" x="274" y="521"/>
+  <object name="giantslime" type="enemy" gid="3" x="273" y="335"/>
+  <object name="giantslime" type="enemy" gid="3" x="81" y="337"/>
+ </objectgroup>
+</map>

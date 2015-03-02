@@ -3,7 +3,6 @@ package
 	import attacks.Attack;
 	import enemies.Enemy;
 	import enemies.EnemyGiantSlime;
-	import enemies.EnemySlime;
 	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
@@ -16,7 +15,7 @@ package
 	
 	import effects.*;
 	
-	public class TmxLevel extends FlxState
+	public class TmxLevel2 extends FlxState
 	{
 		[Embed(source="data/map.png")] private var ImgMap:Class;
 		[Embed(source="data/tileset2.png")] private var ImgTiles:Class;
@@ -47,15 +46,7 @@ package
 		public var exitDoor:Door = null;
 		public var dooropened:Boolean = false;
 		
-		public var tmxfile:String = 'data/map02.tmx';
-		
 		protected var _elevator:FlxSprite;
-		
-		public function TmxLevel(tmxfilepath:String = "") {
-			if (tmxfilepath) {
-				tmxfile = tmxfilepath;
-			}
-		}
 		
 		override public function create():void
 		{
@@ -86,7 +77,7 @@ package
 		{
 			var loader:URLLoader = new URLLoader(); 
 			loader.addEventListener(Event.COMPLETE, onTmxLoaded); 
-			loader.load(new URLRequest(tmxfile)); 
+			loader.load(new URLRequest('data/map03.tmx')); 
 		}
 		
 		private function onTmxLoaded(e:Event):void
@@ -191,7 +182,7 @@ package
 					enemyList.add(spawnEnemy(obj.name, obj.x, obj.y));
 					return;
 				case "door":
-					exitDoor = new Door(obj.x, obj.y - 32, new TmxLevel('data/map03.tmx'));
+					exitDoor = new Door(obj.x, obj.y - 32, new PlayStateTitle() );
 					add(exitDoor);
 					colliders.add(exitDoor);
 					return;
@@ -219,9 +210,6 @@ package
 			switch(en_type) {
 				case "giantslime":
 					newEnemy = new EnemyGiantSlime(X, Y, player);
-					break;
-				case "slime":
-					newEnemy = new EnemySlime(X, Y, player);
 					break;
 			}
 			
