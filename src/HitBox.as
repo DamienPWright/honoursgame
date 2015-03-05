@@ -47,7 +47,7 @@ package
 			height = _height;
 			parity = _parity;
 			lifeSpanInFrames = lifeSpan;
-			makeHitBox(drawHitbox);
+			//makeHitBox(drawHitbox);
 		}
 		
 		/**

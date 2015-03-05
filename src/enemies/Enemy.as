@@ -3,6 +3,7 @@ package enemies {
 	public class Enemy extends Actor {
 		
 		private var target:Actor;
+		protected var dir:int;
 		
 		public function Enemy(X:int, Y:int, t:Actor) {
 			super(X, Y);

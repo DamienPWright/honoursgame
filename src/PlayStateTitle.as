@@ -7,8 +7,8 @@ package
 	 */
 	public class PlayStateTitle extends FlxState
 	{
-		private var titleText:String = "Honors Project Game: Untitled";
-		private var footerText:String  = "B00227833 v.0.00.1";
+		private var titleText:String = "Honors Project Game";
+		private var footerText:String  = "B00227833 v.0.02.12";
 		private var selectorText:String  = ">";
 		private var option1Text:String  = "TBA";
 		private var option2Text:String  = "TBA";

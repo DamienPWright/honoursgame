@@ -158,9 +158,6 @@ package
 				spawnObject(object)
 				
 			add(player);
-			//test enemy
-			var testEnemy = new Enemy(128, 128, player);
-			enemyList.add(testEnemy);
 				
 			colliders.add(player);
 			colliders.add(enemyList);

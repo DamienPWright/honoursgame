@@ -2,9 +2,13 @@ package states
 {
 	import enemies.Enemy;
 	import org.flixel.*;
-	
-	public class EnemySeekTarget implements ActorState
+	/**
+	 * ...
+	 * @author Raujinn
+	 */
+	public class EnemyGiantSlimeSeek implements ActorState 
 	{
+		
 		private var fsm:FiniteStateMachine;
 		private var self:Enemy;
 		private var target:Actor;
@@ -12,7 +16,7 @@ package states
 		private var seekbox_size:int;
 		private var seekbox_pos:FlxPoint;
 		
-		public function EnemySeekTarget(e:Enemy) 
+		public function EnemyGiantSlimeSeek(e:Enemy) 
 		{
 			self = e;
 			fsm = self.getStateMachine();
@@ -25,7 +29,7 @@ package states
 			seekbox.setHitBoxPos(self.x - seekbox_size / 2,  self.y - seekbox_size / 2);
 			if ((FlxG.state as TmxLevel).checkHitboxActorOverlap(seekbox, (FlxG.state as TmxLevel).getPlayer())){
 				self.setTarget((FlxG.state as TmxLevel).getPlayer());
-				fsm.changeState(new EnemyWander(self, self.getTarget()));
+				fsm.changeState(new EnemyGiantSlimePersue(self));
 			}
 		}
 		
@@ -37,5 +41,6 @@ package states
 			
 		}
 	}
+
 
 }

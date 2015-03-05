@@ -17,7 +17,7 @@ package attacks
 		
 		public function Attack(a:Actor) 
 		{
-			
+			actor = a;
 		}
 		
 		public function attackAnimUpdate(currentFrame:Number):void {
@@ -28,6 +28,23 @@ package attacks
 			return actor.attack
 		}
 		
+		public function getAttackComplete():Boolean {
+			return attackComplete;
+		}
+		
+		public function resetAnims():void {
+			attackTimer = 0;
+			attackCurFrame = 0;
+			attackPrevFrame = 0;
+			attackComplete = false;
+		}
+		
+		public function exit():void {
+			attackTimer = 0;
+			if(effect != null){
+				effect.kill();
+			}
+		}
 	}
 
 }

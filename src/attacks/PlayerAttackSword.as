@@ -9,12 +9,8 @@ package attacks {
 			//this class will handle the animation for a given attack
 			//A weapon will have an animation and attempt to sync up with
 			//the actor's animation.
-			actor = a;
+			//actor = a;
 			//in future these could be loaded from JSON files
-			addAnimation("N", [], 12, false);
-			addAnimation("S", [], 12, false);
-			addAnimation("E", [], 12, false);
-			addAnimation("W", [], 12, false);
 
 			actoranim = [
 				[15, 15, 16, 17, 17, 17, 17, 17],
@@ -63,7 +59,7 @@ package attacks {
 					effect.frame = effectanim[3][currentFrame];
 					break;
 			}
-			effect.x = actor.x - (effect.width / 3);
+			effect.x = actor.x - (effect.width / 3) - 6;
 			effect.y = actor.y - (effect.height / 3);
 			
 			
@@ -105,11 +101,7 @@ package attacks {
 			return actor.attack;
 		}
 		
-		public function getAttackComplete():Boolean {
-			return attackComplete;
-		}
-		
-		public function resetAnims():void {
+		override public function resetAnims():void {
 			attackTimer = 0;
 			attackCurFrame = 0;
 			attackPrevFrame = 0;
@@ -118,7 +110,7 @@ package attacks {
 			effect = (FlxG.state as TmxLevel).recycleEffect(SpriteList.sprite_eff_sword_slash, true, false, 96, 96);
 		}
 		
-		public function exit():void {
+		override public function exit():void {
 			attackTimer = 0;
 			effect.kill();
 		}
