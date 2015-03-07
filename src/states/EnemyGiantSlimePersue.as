@@ -26,7 +26,7 @@ package states
 			fsm = self.getStateMachine();
 			seekbox_size = 64;
 			seekbox_pos = new FlxPoint(self.x - seekbox_size / 2, self.y - seekbox_size / 2);
-			seekbox = (FlxG.state as TmxLevel).createHitBox(seekbox_pos.x, seekbox_pos.y, seekbox_size, seekbox_size, 1, 0);
+			seekbox = (FlxG.state as TmxLevel).createHitBox(self.x - seekbox_size / 4,  self.y - seekbox_size / 4, seekbox_size, seekbox_size, 1, 0);
 		}
 		
 		/* INTERFACE states.ActorState */
@@ -61,9 +61,9 @@ package states
 				self.play("walk_n");
 				self.currentFacing = FlxObject.UP;
 			}
-			
 			//use a seekbox to determine if target is close enough
 			seekbox.setHitBoxPos(self.x - seekbox_size / 4,  self.y - seekbox_size / 4);
+			
 			//if so, pick an attack
 			if ((FlxG.state as TmxLevel).checkHitboxActorOverlap(seekbox, target)){
 				fsm.changeState(new EnemyGiantSlimeShriek(self));

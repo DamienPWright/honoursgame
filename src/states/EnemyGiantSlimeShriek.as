@@ -41,6 +41,7 @@ package states
 			attack.update();
 			if (attack.getAttackComplete()) {
 				//attack ends
+				attack.exit();
 				fsm.changeState(new EnemyGiantSlimePersue(self));
 			}
 		}

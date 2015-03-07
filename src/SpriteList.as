@@ -7,7 +7,10 @@ package
 	public class SpriteList 
 	{
 		[Embed(source = "assets/img/sprite_player_b.png")] static public var sprite_player:Class;
+		
+		//effects
 		[Embed(source = "assets/img/eff_sword_slash.png")] static public var sprite_eff_sword_slash:Class;
+		[Embed(source = "assets/img/eff_giantslime_shriek.png")] static public var sprite_eff_giantslime_shriek:Class;
 		
 		//enemies
 		[Embed(source = "assets/img/sprite_en_giantslime.png")] static public var sprite_en_giantslime:Class;
