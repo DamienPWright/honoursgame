@@ -232,6 +232,13 @@ package
 			return newEffect;
 		}
 		
+		public function recycleEffectClass(eff:Class, img:Class = null, animated:Boolean = false, reverse:Boolean = false, frameWidth:int = 0, frameHeight:int = 0):Effect {
+			var newEffect = effectList.recycle(eff);
+			newEffect.exists = true;
+			newEffect.loadGraphic(img, animated, reverse, frameWidth, frameHeight);
+			return newEffect;
+		}
+		
 		public function recycleEnemy():void {
 			var newEnemy = enemyList.recycle(Enemy);
 			newEnemy.exists = true;

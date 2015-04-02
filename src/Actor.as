@@ -1,5 +1,6 @@
 package {
 	import weapons.*;
+	import states.*;
 	import org.flixel.*;
 	
 	public class Actor extends FlxSprite {
@@ -52,6 +53,14 @@ package {
 		 * 
 		 * @param	damage
 		 */
+		
+		public function onDeath():void {
+			//remove attack effects
+			fsm.changeState(new ActorIdle(this));
+			kill();
+		}
+		 
+		 
 		public function dealDamage(damage:int) {
 			curHp -= damage; //For now. Later may add some checks for damage reduction via SEs, gear etc. 
 			//consider adding a damage indicator text. Green for negative damage, red for positive damage. "Guard!" for 0 damage. 
@@ -61,7 +70,7 @@ package {
 			//Dead check!
 			if (curHp <= 0) {
 				//dead!
-				kill();
+  				onDeath();
 			}
 		}
 	}

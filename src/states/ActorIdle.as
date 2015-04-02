@@ -1,31 +1,24 @@
-import states.ActorState;
 package states {
+	import states.ActorState;
+	import org.flixel.*;
+	
 	public class ActorIdle implements ActorState {
 		private var fsm:FiniteStateMachine;
-		private var self:FlxSprite;
+		private var self:Actor;
 		
-		public function ActorIdle(a: FlxSprite) {
+		public function ActorIdle(a: Actor) {
 			self = a;
-			fsm = self.GetStateMachine();
+			fsm = self.getStateMachine();
+		}
+		public function onEnter():void {
+			
 		}
 		
-		override public function update():void {
-			//anim
-			switch(a.currentFacing) {
-				case UP:
-					anim = "idle_north";
-					break;
-				case DOWN:
-					anim = "idle_south";
-					break;
-				case LEFT:
-					anim = "idle_west";
-					break;
-				case RIGHT:
-					anim = "idle_east";
-					break;
-			}
-			a.play(anim);
+		public function onExit():void {
+			
+		}
+		public function update():void {
+
 		}
 	}
 }

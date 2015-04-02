@@ -19,8 +19,6 @@ package states
 		{
 			self = a;
 			fsm = self.getStateMachine();
-			count = 0;
-			attack_length = 25;
 			attack = new EnemyAttackGiantSlimeShriek(self);
 		}
 		
@@ -49,6 +47,7 @@ package states
 		public function onExit():void 
 		{
 			self.immovable = false;
+			attack.exit();
 		}
 		
 	}

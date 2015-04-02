@@ -14,6 +14,14 @@ package attacks
 		protected var attackPrevFrame:Number = 0;
 		protected var attackComplete:Boolean;
 		protected var effect:Effect;
+		//new system
+		protected var effectsList:Array;
+		protected var telegraphAnimFrames:Array;
+		protected var telegraphAnimLoop:Boolean = false;
+		protected var attackAnimFrames:Array;
+		protected var attackAnimFramesLoop:Boolean = false;
+		protected var attackAnimLength:int = 0;
+		protected var telegraphAnimLength:int = 0;
 		
 		public function Attack(a:Actor) 
 		{

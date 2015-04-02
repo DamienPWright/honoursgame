@@ -1,6 +1,7 @@
 package attacks 
 {
 	import org.flixel.*;
+	import effects.*;
 	/**
 	 * ...
 	 * @author Raujinn
@@ -23,13 +24,30 @@ package attacks
 				[12, 13],
 				[17, 18]	
 			];
-			
 			effectanim = [
 				[9, 11, 13, 15],
 				[8, 10, 12, 14],
 				[0, 2, 4, 6],
 				[1, 3, 5, 7]
 			];
+			effectsList = [
+				[EffectGiantSlimeShriek,SpriteList.sprite_eff_giantslime_shriek, true, false, 64, 64]
+			]
+			telegraphAnimLoop = false;
+			telegraphAnimFrames = [
+				[2],
+				[7],
+				[12],
+				[17],
+				[-1]
+			]
+			attackAnimFrames = [
+				[3,3],
+				[8,8],
+				[13,13],
+				[18,18],
+				[-1,0]
+			]
 			attackTimer = 0;
 			attackEndTime = 90; //frames
 			attackComplete = false;
@@ -142,7 +160,7 @@ package attacks
 			attackPrevFrame = 0;
 			attackComplete = false;
 			//generate effect
-			effect = (FlxG.state as TmxLevel).recycleEffect(SpriteList.sprite_eff_giantslime_shriek, true, false, 64, 64);
+			effect = (FlxG.state as TmxLevel).recycleEffectClass(EffectGiantSlimeShriek,SpriteList.sprite_eff_giantslime_shriek, true, false, 64, 64);
 		}
 		
 		override public function exit():void {
