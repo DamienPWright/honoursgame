@@ -232,10 +232,12 @@ package
 			return newEffect;
 		}
 		
-		public function recycleEffectClass(eff:Class, img:Class = null, animated:Boolean = false, reverse:Boolean = false, frameWidth:int = 0, frameHeight:int = 0):Effect {
+		public function recycleEffectClass(eff:Class, a:Actor, atk:Attack, img:Class = null, animated:Boolean = false, reverse:Boolean = false, frameWidth:int = 0, frameHeight:int = 0):Effect {
 			var newEffect = effectList.recycle(eff);
 			newEffect.exists = true;
 			newEffect.loadGraphic(img, animated, reverse, frameWidth, frameHeight);
+			newEffect.setActor(a);
+			newEffect.setAttack(atk);
 			return newEffect;
 		}
 		

@@ -41,6 +41,7 @@ package attacks
 				[17],
 				[-1]
 			]
+			attackAnimFramesLoop = false;
 			attackAnimFrames = [
 				[3,3],
 				[8,8],
@@ -56,91 +57,67 @@ package attacks
 		
 		override public function update():void
 		{
-			attackTimer += 1
-			effect.frame = 16;
+			
+			var curanim = [];
+			var curanimloop = false;
+			
 			if (attackTimer < telegraphLength) {
-				currentFrame = telegraphFrame;
+				curanim = telegraphAnimFrames;
+				curanimloop = telegraphAnimLoop;
 			}else {
-				currentFrame = attackFrame;
+				curanim = attackAnimFrames;
+				curanimloop = attackAnimFramesLoop;
 			}
+			if (attackTimer == telegraphLength) {
+				currentFrame = 0;
+			}
+			
+			var d = 0;
+			
 			switch(actor.currentFacing) {
 				case FlxObject.UP:
-					actor.frame = actoranim[1][currentFrame];
+					d = 1;
 					effect.x = actor.x - effect.width / 4;
 					effect.y = actor.y - effect.height;
 					break;
 				case FlxObject.DOWN:
-					actor.frame = actoranim[0][currentFrame];
+					d = 0;
 					effect.x = actor.x - effect.width / 4;
 					effect.y = actor.y + effect.height / 2;
 					break;
 				case FlxObject.LEFT:
-					actor.frame = actoranim[2][currentFrame];
+					d = 2;
 					effect.x = actor.x - effect.width;
 					effect.y = actor.y - effect.height / 4;
 					break;
 				case FlxObject.RIGHT:
-					actor.frame = actoranim[3][currentFrame];
+					d = 3;
 					effect.x = actor.x + effect.width / 2;
 					effect.y = actor.y - effect.height / 4;
 					break;
 			}
-			
-			if(attackTimer > telegraphLength){ 
-				switch(actor.currentFacing) {
-					case FlxObject.UP:
-					effect.x = actor.x - effect.width / 4;
-					effect.y = actor.y - effect.height;
-					effect.frame = effectanim[0][attackTimer % 4];
-					break;
-				case FlxObject.DOWN:
-					effect.x = actor.x - effect.width / 4;
-					effect.y = actor.y + effect.height / 2;
-					effect.frame = effectanim[1][attackTimer % 4];
-					break;
-				case FlxObject.LEFT:
-					effect.x = actor.x - effect.width;
-					effect.y = actor.y - effect.height / 4;
-					effect.frame = effectanim[2][attackTimer % 4];
-					break;
-				case FlxObject.RIGHT:
-					effect.x = actor.x + effect.width / 2;
-					effect.y = actor.y - effect.height / 4;
-					effect.frame = effectanim[3][attackTimer % 4];
-					break;
+			trace(d);
+			if (currentFrame > curanim[0].length) {
+				if (curanimloop) {
+					currentFrame = 0;
+				}else{
+					currentFrame = curanim[0].length;
 				}
-				
 			}
-			
-			if((attackTimer % 12 == 0) && (attackTimer > telegraphLength) && (attackTimer < attackEndTime)){
-				switch(actor.currentFacing) {
-					case FlxObject.UP:
-						(FlxG.state as TmxLevel).createHitBoxAttack(this, actor.x-8, actor.y-48, 48, 48, 1, 1);
-						break;
-					case FlxObject.DOWN:
-						(FlxG.state as TmxLevel).createHitBoxAttack(this, actor.x-8, actor.y+32, 48, 48, 1, 1);
-						break;
-					case FlxObject.LEFT:
-						(FlxG.state as TmxLevel).createHitBoxAttack(this, actor.x-48, actor.y-8, 48, 48, 1, 1);
-						break;
-					case FlxObject.RIGHT:
-						(FlxG.state as TmxLevel).createHitBoxAttack(this, actor.x+32, actor.y-8, 48, 48, 1, 1);
-						break;
-				}
-				
+			actor.frame = curanim[d][currentFrame];
+			if (curanim[4][currentFrame] != -1) {
+				(FlxG.state as TmxLevel).recycleEffectClass(EffectGiantSlimeShriek,actor,this,SpriteList.sprite_eff_giantslime_shriek, true, false, 64, 64);
 			}
-			
+			currentFrame += 1;
+			attackTimer += 1;
 			if (attackTimer > attackEndTime) {
 				attackComplete = true;
 			}
+			
 		}
 		
 		override public function attackAnimUpdate(currentFrame:Number):void {
-			//get facing
 			
-			if (currentFrame == 7) {
-				//generate hitbox
-			}
 		}
 		/**
 		 * Use this function to fire any unique "on attack" effects gear might have.
@@ -160,7 +137,7 @@ package attacks
 			attackPrevFrame = 0;
 			attackComplete = false;
 			//generate effect
-			effect = (FlxG.state as TmxLevel).recycleEffectClass(EffectGiantSlimeShriek,SpriteList.sprite_eff_giantslime_shriek, true, false, 64, 64);
+			effect = (FlxG.state as TmxLevel).recycleEffectClass(EffectGiantSlimeShriek,actor,this,SpriteList.sprite_eff_giantslime_shriek, true, false, 64, 64);
 		}
 		
 		override public function exit():void {
