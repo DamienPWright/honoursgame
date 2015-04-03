@@ -22,6 +22,8 @@ package attacks
 		protected var attackAnimFramesLoop:Boolean = false;
 		protected var attackAnimLength:int = 0;
 		protected var telegraphAnimLength:int = 0;
+		protected var curanim:Array;
+		protected var curanimloop = false;
 		
 		public function Attack(a:Actor) 
 		{

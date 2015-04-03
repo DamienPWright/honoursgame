@@ -15,7 +15,6 @@ package effects
 		protected var hitboxArrayE:Array;
 		protected var hitboxArrayW:Array;
 		protected var hitboxArrayPos:int = 0;
-		protected var actor:Actor;
 		protected var attack:Attack;
 		
 		public function AttackEffect() 

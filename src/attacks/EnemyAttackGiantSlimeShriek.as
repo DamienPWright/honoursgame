@@ -47,7 +47,7 @@ package attacks
 				[8,8],
 				[13,13],
 				[18,18],
-				[-1,0]
+				[0,-1]
 			]
 			attackTimer = 0;
 			attackEndTime = 90; //frames
@@ -57,9 +57,6 @@ package attacks
 		
 		override public function update():void
 		{
-			
-			var curanim = [];
-			var curanimloop = false;
 			
 			if (attackTimer < telegraphLength) {
 				curanim = telegraphAnimFrames;
@@ -71,42 +68,38 @@ package attacks
 			if (attackTimer == telegraphLength) {
 				currentFrame = 0;
 			}
-			
+			//trace(curanim);
 			var d = 0;
 			
 			switch(actor.currentFacing) {
 				case FlxObject.UP:
 					d = 1;
-					effect.x = actor.x - effect.width / 4;
-					effect.y = actor.y - effect.height;
 					break;
 				case FlxObject.DOWN:
 					d = 0;
-					effect.x = actor.x - effect.width / 4;
-					effect.y = actor.y + effect.height / 2;
 					break;
 				case FlxObject.LEFT:
 					d = 2;
-					effect.x = actor.x - effect.width;
-					effect.y = actor.y - effect.height / 4;
 					break;
 				case FlxObject.RIGHT:
 					d = 3;
-					effect.x = actor.x + effect.width / 2;
-					effect.y = actor.y - effect.height / 4;
 					break;
 			}
-			trace(d);
-			if (currentFrame > curanim[0].length) {
+			//trace(d);
+			if (currentFrame >= curanim[0].length) {
 				if (curanimloop) {
 					currentFrame = 0;
 				}else{
-					currentFrame = curanim[0].length;
+					currentFrame = curanim[0].length - 1;
 				}
 			}
+			
 			actor.frame = curanim[d][currentFrame];
-			if (curanim[4][currentFrame] != -1) {
-				(FlxG.state as TmxLevel).recycleEffectClass(EffectGiantSlimeShriek,actor,this,SpriteList.sprite_eff_giantslime_shriek, true, false, 64, 64);
+			//trace("curframe:" + curanim[d][currentFrame]);
+			if ((curanim[4][currentFrame] != -1) && (curanim[4][currentFrame] != undefined)) {
+				var eff = curanim[4][currentFrame];
+				trace("created");
+				(FlxG.state as TmxLevel).recycleEffectClass(EffectGiantSlimeShriek,actor,this,SpriteList.sprite_eff_giantslime_shriek, true, false, 64, effectsList[eff][5]);
 			}
 			currentFrame += 1;
 			attackTimer += 1;
@@ -137,12 +130,12 @@ package attacks
 			attackPrevFrame = 0;
 			attackComplete = false;
 			//generate effect
-			effect = (FlxG.state as TmxLevel).recycleEffectClass(EffectGiantSlimeShriek,actor,this,SpriteList.sprite_eff_giantslime_shriek, true, false, 64, 64);
+			//effect = (FlxG.state as TmxLevel).recycleEffectClass(EffectGiantSlimeShriek,actor,this,SpriteList.sprite_eff_giantslime_shriek, true, false, 64, 64);
 		}
 		
 		override public function exit():void {
 			attackTimer = 0;
-			effect.kill();
+			//effect.kill();
 		}
 	}
 
