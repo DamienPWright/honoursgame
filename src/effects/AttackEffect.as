@@ -32,7 +32,7 @@ package effects
 		
 		override public function update():void {
 			super.update();
-			
+			var anim = "";
 			//effect anim
 			if (frameCount >= attackFrames[0].length){
 				if (attackFramesLoop) {
@@ -57,9 +57,10 @@ package effects
 						break;
 					case FlxObject.LEFT:
 						d = 2;
+						anim = "l";
 						break;
 				}
-				//trace(d);
+				trace(frameCount);
 				frame = attackFrames[d][frameCount];
 				if (attackFrames[4][frameCount] != -1) {
 					//trace("generate effect");

@@ -18,6 +18,7 @@ package effects
 			
 			effectLifeSpanStart = 30;
 			effectLifeSpan = effectLifeSpanStart;
+			
 			attackFramesLoop = true;
 			attackFrames = [
 				[9, 11, 13, 15],

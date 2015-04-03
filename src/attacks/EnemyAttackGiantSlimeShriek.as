@@ -8,28 +8,11 @@ package attacks
 	 */
 	public class EnemyAttackGiantSlimeShriek extends Attack 
 	{
-		private var currentFrame:int = 0;
-		private var endFrame:int = 0;
-		private var telegraphFrame:int = 0;
-		private var attackFrame:int = 1;
-		private var telegraphLength:int = 45;
+		
 		
 		public function EnemyAttackGiantSlimeShriek(a:Actor) 
 		{
 			super(a);
-			
-			actoranim = [
-				[2, 3],
-				[7, 8],
-				[12, 13],
-				[17, 18]	
-			];
-			effectanim = [
-				[9, 11, 13, 15],
-				[8, 10, 12, 14],
-				[0, 2, 4, 6],
-				[1, 3, 5, 7]
-			];
 			effectsList = [
 				[EffectGiantSlimeShriek,SpriteList.sprite_eff_giantslime_shriek, true, false, 64, 64]
 			]
@@ -51,62 +34,14 @@ package attacks
 			]
 			attackTimer = 0;
 			attackEndTime = 90; //frames
+			telegraphLength = 45;
 			attackComplete = false;
 			resetAnims();
 		}
 		
 		override public function update():void
 		{
-			
-			if (attackTimer < telegraphLength) {
-				curanim = telegraphAnimFrames;
-				curanimloop = telegraphAnimLoop;
-			}else {
-				curanim = attackAnimFrames;
-				curanimloop = attackAnimFramesLoop;
-			}
-			if (attackTimer == telegraphLength) {
-				currentFrame = 0;
-			}
-			//trace(curanim);
-			var d = 0;
-			
-			switch(actor.currentFacing) {
-				case FlxObject.UP:
-					d = 1;
-					break;
-				case FlxObject.DOWN:
-					d = 0;
-					break;
-				case FlxObject.LEFT:
-					d = 2;
-					break;
-				case FlxObject.RIGHT:
-					d = 3;
-					break;
-			}
-			//trace(d);
-			if (currentFrame >= curanim[0].length) {
-				if (curanimloop) {
-					currentFrame = 0;
-				}else{
-					currentFrame = curanim[0].length - 1;
-				}
-			}
-			
-			actor.frame = curanim[d][currentFrame];
-			//trace("curframe:" + curanim[d][currentFrame]);
-			if ((curanim[4][currentFrame] != -1) && (curanim[4][currentFrame] != undefined)) {
-				var eff = curanim[4][currentFrame];
-				trace("created");
-				(FlxG.state as TmxLevel).recycleEffectClass(EffectGiantSlimeShriek,actor,this,SpriteList.sprite_eff_giantslime_shriek, true, false, 64, effectsList[eff][5]);
-			}
-			currentFrame += 1;
-			attackTimer += 1;
-			if (attackTimer > attackEndTime) {
-				attackComplete = true;
-			}
-			
+			super.update();
 		}
 		
 		override public function attackAnimUpdate(currentFrame:Number):void {

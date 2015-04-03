@@ -1,5 +1,5 @@
 package attacks {
-	import effects.Effect;
+	import effects.*;
 	import org.flixel.*;
 	
 	public class PlayerAttackSword extends Attack {
@@ -26,72 +26,38 @@ package attacks {
 				[8,8,9,10,11,11,11,11]
 			]
 			
+			effectsList = [
+				[EffectPlayerSword, SpriteList.sprite_eff_sword_slash, true, false, 96, 96]
+			]
+			telegraphLength = 0;
+			telegraphAnimLoop = false;
+			telegraphAnimFrames = [
+				[0],
+				[0],
+				[0],
+				[0],
+				[-1]
+			]
+			attackAnimFramesLoop = false;
+			attackAnimFrames = [
+				[12, 12, 13, 14, 14, 14, 14, 14],
+				[15, 15, 16, 17, 17, 17, 17, 17],
+				[21, 21, 22, 23, 23, 23, 23, 23],
+				[18, 18, 19, 20, 20, 20, 20, 20],
+				[0, -1, -1, -1, -1, -1, -1, -1]
+			]
 			attackTimer = 0;
-			attackEndTime = 0.25; //seconds
+			attackEndTime = 15; //frames
 			attackComplete = false;
+			resetAnims();
 		}
 		
 		override public function update():void
 		{
-			var currentFrame = Math.floor(attackTimer / 0.0333); //0.0833
-			
-			if (attackPrevFrame != currentFrame) {
-				attackAnimUpdate(currentFrame);
-				attackPrevFrame = currentFrame;
-			}
-			
-			//anim
-			switch((actor as Player).currentFacing) {
-				case FlxObject.UP:
-					actor.frame = actoranim[0][currentFrame];
-					effect.frame = effectanim[0][currentFrame];
-					break;
-				case FlxObject.DOWN:
-					actor.frame = actoranim[1][currentFrame];
-					effect.frame = effectanim[1][currentFrame];
-					break;
-				case FlxObject.LEFT:
-					actor.frame = actoranim[2][currentFrame];
-					effect.frame = effectanim[2][currentFrame];
-					break;
-				case FlxObject.RIGHT:
-					actor.frame = actoranim[3][currentFrame];
-					effect.frame = effectanim[3][currentFrame];
-					break;
-			}
-			effect.x = actor.x - (effect.width / 3) - 6;
-			effect.y = actor.y - (effect.height / 3);
-			
-			
-			attackTimer += FlxG.elapsed;
-			
-			if (attackTimer > attackEndTime) {
-				attackComplete = true;
-			}
+			super.update();
 		}
 		
 		override public function attackAnimUpdate(currentFrame:Number):void {
-			
-			
-			
-			
-			if (currentFrame == 2) {
-				switch((actor as Player).currentFacing) {
-					case FlxObject.UP:
-						(FlxG.state as TmxLevel).createHitBoxAttack(this, actor.x-32, actor.y-24, 96, 48, 2, 1);
-						break;
-					case FlxObject.DOWN:
-						(FlxG.state as TmxLevel)..createHitBoxAttack(this, actor.x-32, actor.y+24, 96, 48, 2, 1);
-						break;
-					case FlxObject.LEFT:
-						(FlxG.state as TmxLevel)..createHitBoxAttack(this, actor.x-24, actor.y-32, 48, 96, 2, 1);
-						break;
-					case FlxObject.RIGHT:
-						(FlxG.state as TmxLevel)..createHitBoxAttack(this, actor.x+24, actor.y-32, 48, 96, 2, 1);
-						break;
-				}
-				
-			}
 		}
 		/**
 		 * Use this function to fire any unique "on attack" effects gear might have.

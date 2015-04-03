@@ -12,9 +12,11 @@ package effects {
 			super(0, 0);
 		}
 		
-		override public function update():void 
-		{
+    	override public function update():void {
 			super.update();
+		}
+		
+		override public function postUpdate():void {
 			effectLifeSpan -= 1;
 			
 			if (effectLifeSpan <= 0) {
