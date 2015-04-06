@@ -48,20 +48,28 @@ package
 		public var dooropened:Boolean = false;
 		
 		public var tmxfile:String = 'data/map02.tmx';
+		public var tmxEmbed:Class;
 		
 		protected var _elevator:FlxSprite;
-		
+		/*
 		public function TmxLevel(tmxfilepath:String = "") {
 			if (tmxfilepath) {
 				tmxfile = tmxfilepath;
 			}
 		}
+		*/
+		public function TmxLevel(xml:Class) {
+			tmxEmbed = xml;
+		}
 		
 		override public function create():void
 		{
 			super.create();
-			loadTmxFile();
-			
+			var _xml = new XML(new tmxEmbed);
+			var tmx = new TmxMap(_xml);
+			//trace(_xml);
+			//trace(tmx);
+			loadStateFromTmx(tmx);
 		}
 		
 		override public function update():void
@@ -92,6 +100,11 @@ package
 		private function onTmxLoaded(e:Event):void
 		{
 			var xml:XML = new XML(e.target.data);
+			var tmx:TmxMap = new TmxMap(xml);
+			loadStateFromTmx(tmx);
+		}
+		
+		private function embeddedTmxLoad(xml:XML) {
 			var tmx:TmxMap = new TmxMap(xml);
 			loadStateFromTmx(tmx);
 		}
@@ -188,7 +201,7 @@ package
 					enemyList.add(spawnEnemy(obj.name, obj.x, obj.y));
 					return;
 				case "door":
-					exitDoor = new Door(obj.x, obj.y - 32, new TmxLevel('data/map03.tmx'));
+					exitDoor = new Door(obj.x, obj.y - 32, new TmxLevel(TmxList.level_03));
 					add(exitDoor);
 					colliders.add(exitDoor);
 					return;
@@ -236,6 +249,7 @@ package
 			var newEffect = effectList.recycle(eff);
 			newEffect.exists = true;
 			newEffect.loadGraphic(img, animated, reverse, frameWidth, frameHeight);
+			trace(img);
 			newEffect.setActor(a);
 			newEffect.setAttack(atk);
 			return newEffect;
