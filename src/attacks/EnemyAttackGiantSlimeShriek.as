@@ -36,6 +36,7 @@ package attacks
 			attackEndTime = 90; //frames
 			telegraphLength = 45;
 			attackComplete = false;
+			//initAnims();
 			resetAnims();
 		}
 		

@@ -28,6 +28,8 @@ package effects
 				[8, 8, 9, 10, 11, 11, 11, 11],
 				[ -1, -1, -1, -1, 0, -1, -1, -1]
 			]
+			
+			initAnims();
 		}
 		
 		override public function update():void {

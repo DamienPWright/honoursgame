@@ -12,6 +12,7 @@ package {
 			maxVelocity.x = movespeed;
 			maxVelocity.y = movespeed;
 			
+			faction = "player";
 
 			
 			loadGraphic(SpriteList.sprite_player, true, false, 32, 32);

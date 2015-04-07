@@ -252,6 +252,9 @@ package
 			trace(img);
 			newEffect.setActor(a);
 			newEffect.setAttack(atk);
+			newEffect.x = -1000;
+			newEffect.y = -1000;
+			newEffect.playAnim();
 			return newEffect;
 		}
 		
@@ -282,6 +285,9 @@ package
 				case 1:
 					if (a.faction == "player") {
 						//perform player hurt routine
+						if(hb.getAttack()){
+							a.onHit(hb);
+						}
 					}
 					break;
 				case 2:

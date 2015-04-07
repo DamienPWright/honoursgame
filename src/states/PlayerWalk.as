@@ -67,7 +67,6 @@ package states {
 					break;
 			}
 			self.play(anim);
-			
 		}
 		
 		public function onExit():void {

@@ -17,6 +17,7 @@ package effects {
 		}
 		
 		override public function postUpdate():void {
+			super.postUpdate();
 			effectLifeSpan -= 1;
 			
 			if (effectLifeSpan <= 0) {

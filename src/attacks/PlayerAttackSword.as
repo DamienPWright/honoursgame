@@ -49,6 +49,7 @@ package attacks {
 			attackTimer = 0;
 			attackEndTime = 15; //frames
 			attackComplete = false;
+			//initAnims();
 			resetAnims();
 		}
 		
@@ -73,12 +74,12 @@ package attacks {
 			attackPrevFrame = 0;
 			attackComplete = false;
 			//generate effect
-			effect = (FlxG.state as TmxLevel).recycleEffect(SpriteList.sprite_eff_sword_slash, true, false, 96, 96);
+			//effect = (FlxG.state as TmxLevel).recycleEffect(SpriteList.sprite_eff_sword_slash, true, false, 96, 96);
 		}
 		
 		override public function exit():void {
 			attackTimer = 0;
-			effect.kill();
+			//effect.kill();
 		}
 	}
 }

@@ -30,9 +30,37 @@ package effects
 			attack = atk;
 		}
 		
+		public function playAnim():void {
+			var d = "";
+			//anim
+			switch(actor.currentFacing) {
+				case FlxObject.UP:
+					d = "n";
+					break;
+				case FlxObject.DOWN:
+					d = "s";
+					break;
+				case FlxObject.RIGHT:
+					d = "e";
+					break;
+				case FlxObject.LEFT:
+					d = "w";
+					break;
+			}
+			//trace(frameCount);
+			play(d, true);
+		}
+		
+		protected function initAnims():void {
+			addAnimation("n", attackFrames[0], 30, true);
+			addAnimation("s", attackFrames[1], 30, attackFramesLoop);
+			addAnimation("e", attackFrames[2], 30, attackFramesLoop);
+			addAnimation("w", attackFrames[3], 30, attackFramesLoop);
+			trace("anims init");
+		}
+		
 		override public function update():void {
 			super.update();
-			var anim = "";
 			//effect anim
 			if (frameCount >= attackFrames[0].length){
 				if (attackFramesLoop) {
@@ -43,25 +71,6 @@ package effects
 			}
 			
 			if (!(frameCount >= attackFrames[0].length)) {
-				var d = 0;
-				//anim
-				switch(actor.currentFacing) {
-					case FlxObject.UP:
-						d = 0;
-						break;
-					case FlxObject.DOWN:
-						d = 1;
-						break;
-					case FlxObject.RIGHT:
-						d = 3;
-						break;
-					case FlxObject.LEFT:
-						d = 2;
-						anim = "l";
-						break;
-				}
-				trace(frameCount);
-				frame = attackFrames[d][frameCount];
 				if (attackFrames[4][frameCount] != -1) {
 					//trace("generate effect");
 					var hb = attackFrames[4][frameCount];
@@ -83,6 +92,8 @@ package effects
 					(FlxG.state as TmxLevel).createHitBoxAttack(attack, actor.x + hba[0], actor.y + hba[1], hba[2], hba[3], hba[4], hba[5]); 
 				}
 			}
+			//updateAnimation();
+			//trace(this);
 			frameCount += 1;
 		}
 	}
