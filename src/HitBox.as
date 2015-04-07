@@ -8,6 +8,7 @@ package
 		private var lifeSpanInFrames:int = 0;
 		private var drawHitbox:Boolean = false;
 		private var parity:int = 0;
+		public var dealsDamage:Boolean = false;
 		private var attack:Attack
 		private var objList:FlxGroup = new FlxGroup();
 		

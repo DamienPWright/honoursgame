@@ -17,6 +17,8 @@ package {
 			
 			loadGraphic(SpriteList.sprite_player, true, false, 32, 32);
 			
+			maxHp = 100;
+			curHp = maxHp;
 			width = 20;
 			height = 32;
 			offset.x = 6;

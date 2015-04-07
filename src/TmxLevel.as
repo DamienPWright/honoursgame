@@ -212,6 +212,8 @@ package
 			var newHitBox = hitboxList.recycle(HitBox);
 			newHitBox.resetHitBox(X, Y, W, H, parity, lifespan);
 			newHitBox.exists = true;
+			newHitBox.setAttack(null);
+			newHitBox.dealsDamage = false;
 			return newHitBox;
 		}
 		
@@ -220,6 +222,7 @@ package
 			newHitBox.resetHitBox(X, Y, W, H, parity, lifespan);
 			newHitBox.exists = true;
 			newHitBox.setAttack(attack);
+			newHitBox.dealsDamage = true;
 			return newHitBox;
 		}
 		

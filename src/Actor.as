@@ -40,7 +40,9 @@ package {
 			if (!hb.checkActorInObjectList(this)) {
 				dealDamage(dmg);
 			}
-			flicker(0.2);
+			if(dmg > 0){
+				flicker(0.2);
+			}
 		}
 		
 		public override function update():void {
