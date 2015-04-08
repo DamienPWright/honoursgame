@@ -20,6 +20,10 @@ package
 		
 		//furniture
 		[Embed(source = "assets/img/door.png")] static public var sprite_fu_door:Class;
+		
+		//HUD
+		[Embed(source = "assets/img/hud_hpcontainer.png")] static public var sprite_hud_hpcontainer:Class;
+		[Embed(source = "assets/img/hud_hpbar.png")] static public var sprite_hud_hpbar:Class;
 
 	}
 

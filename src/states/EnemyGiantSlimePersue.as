@@ -43,11 +43,8 @@ package states
 				self.velocity.x = self.movespeed * Math.cos(dir);
 				self.velocity.y = self.movespeed * Math.sin(dir);
 			}
-			
-			
 
 			dir = dir / Math.PI + 1;
-			trace(dir);
 			if (dir >= 0.75 && dir <= 1.25) {
 				self.play("walk_e");
 				self.currentFacing = FlxObject.RIGHT;
@@ -74,7 +71,6 @@ package states
 		public function onExit():void 
 		{
 			seekbox.killHitBox();
-			trace("hitbox killed");
 		}
 		
 	}

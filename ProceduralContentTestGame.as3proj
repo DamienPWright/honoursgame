@@ -17,6 +17,7 @@
   <classpaths>
     <class path="src" />
     <class path="..\..\flixel" />
+    <class path="C:\Users\b00227833\flixel" />
   </classpaths>
   <!-- Build options -->
   <build>

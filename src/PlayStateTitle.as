@@ -67,7 +67,7 @@ package
 			if (FlxG.keys.justPressed("ENTER")) {
 				switch(currentOption) {
 					case 2:
-						FlxG.switchState(new TmxLevel());
+						FlxG.switchState(new TmxLevel(TmxList.level_02));
 						break;
 					case 3:
 						FlxG.switchState(new GenericLevel());

@@ -1,9 +1,7 @@
 package
 {
 	import attacks.Attack;
-	import enemies.Enemy;
-	import enemies.EnemyGiantSlime;
-	import enemies.EnemySlime;
+	import enemies.*;
 	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
@@ -39,6 +37,8 @@ package
 		public var bulletListSize:int = 20;
 		public var actorList:FlxGroup = new FlxGroup();
 		
+		public var hud:HUD;
+		
 		public var hitboxList:FlxGroup = new FlxGroup();
 		public var hitboxListSize:int = 50;
 		public var drawHitBoxes:Boolean = true; 
@@ -48,20 +48,29 @@ package
 		public var dooropened:Boolean = false;
 		
 		public var tmxfile:String = 'data/map02.tmx';
+		public var tmxEmbed:Class;
 		
 		protected var _elevator:FlxSprite;
-		
+		/*
 		public function TmxLevel(tmxfilepath:String = "") {
 			if (tmxfilepath) {
 				tmxfile = tmxfilepath;
 			}
 		}
+		*/
+		public function TmxLevel(xml:Class) {
+			tmxEmbed = xml;
+		}
 		
 		override public function create():void
 		{
 			super.create();
-			loadTmxFile();
-			
+			var _xml = new XML(new tmxEmbed);
+			var tmx = new TmxMap(_xml);
+			//trace(_xml);
+			//trace(tmx);
+			loadStateFromTmx(tmx);
+			hud = new HUD(player, this);
 		}
 		
 		override public function update():void
@@ -92,6 +101,11 @@ package
 		private function onTmxLoaded(e:Event):void
 		{
 			var xml:XML = new XML(e.target.data);
+			var tmx:TmxMap = new TmxMap(xml);
+			loadStateFromTmx(tmx);
+		}
+		
+		private function embeddedTmxLoad(xml:XML) {
 			var tmx:TmxMap = new TmxMap(xml);
 			loadStateFromTmx(tmx);
 		}
@@ -181,14 +195,14 @@ package
 			switch(obj.type)
 			{
 				case "player":
-					player = new Player(obj.x, obj.y);
+					player = GameManager.initPlayer(obj.x, obj.y);
 					return;
 				case "enemy":
 					//create enemy based on type.
 					enemyList.add(spawnEnemy(obj.name, obj.x, obj.y));
 					return;
 				case "door":
-					exitDoor = new Door(obj.x, obj.y - 32, new TmxLevel('data/map03.tmx'));
+					exitDoor = new Door(obj.x, obj.y - 32, new TmxLevel(TmxList.level_03));
 					add(exitDoor);
 					colliders.add(exitDoor);
 					return;
@@ -199,6 +213,8 @@ package
 			var newHitBox = hitboxList.recycle(HitBox);
 			newHitBox.resetHitBox(X, Y, W, H, parity, lifespan);
 			newHitBox.exists = true;
+			newHitBox.setAttack(null);
+			newHitBox.dealsDamage = false;
 			return newHitBox;
 		}
 		
@@ -207,6 +223,7 @@ package
 			newHitBox.resetHitBox(X, Y, W, H, parity, lifespan);
 			newHitBox.exists = true;
 			newHitBox.setAttack(attack);
+			newHitBox.dealsDamage = true;
 			return newHitBox;
 		}
 		
@@ -229,6 +246,19 @@ package
 			var newEffect = effectList.recycle(Effect);
 			newEffect.exists = true;
 			newEffect.loadGraphic(img, animated, reverse, frameWidth, frameHeight);
+			return newEffect;
+		}
+		
+		public function recycleEffectClass(eff:Class, a:Actor, atk:Attack, img:Class = null, animated:Boolean = false, reverse:Boolean = false, frameWidth:int = 0, frameHeight:int = 0):Effect {
+			var newEffect = effectList.recycle(eff);
+			newEffect.exists = true;
+			newEffect.loadGraphic(img, animated, reverse, frameWidth, frameHeight);
+			trace(img);
+			newEffect.setActor(a);
+			newEffect.setAttack(atk);
+			newEffect.x = -1000;
+			newEffect.y = -1000;
+			newEffect.playAnim();
 			return newEffect;
 		}
 		
@@ -259,6 +289,9 @@ package
 				case 1:
 					if (a.faction == "player") {
 						//perform player hurt routine
+						if(hb.getAttack()){
+							a.onHit(hb);
+						}
 					}
 					break;
 				case 2:

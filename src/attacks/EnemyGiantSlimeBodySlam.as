@@ -10,7 +10,7 @@ package attacks
 		public function EnemyGiantSlimeBodySlam(a:Actor) 
 		{
 			super(a);
-			
+			initAnims();
 		}
 		
 	}

@@ -12,10 +12,13 @@ package {
 			maxVelocity.x = movespeed;
 			maxVelocity.y = movespeed;
 			
+			faction = "player";
 
 			
 			loadGraphic(SpriteList.sprite_player, true, false, 32, 32);
 			
+			maxHp = 100;
+			curHp = maxHp;
 			width = 20;
 			height = 32;
 			offset.x = 6;
@@ -41,6 +44,10 @@ package {
 		override public function update():void
 		{
 			super.update();
+		}
+		
+		override public function destroy():void {
+			
 		}
 	}
 }
