@@ -31,6 +31,8 @@ package attacks
 		protected var attackFrame:int = 1;
 		protected var telegraphLength:int = 0;
 		
+		private var attackMod:Number = 1.0;
+		
 		public function Attack(a:Actor) 
 		{
 			actor = a;
@@ -92,7 +94,7 @@ package attacks
 		}
 		
 		public function getDamage():int {
-			return actor.attack
+			return actor.attack * attackMod;
 		}
 		
 		public function getAttackComplete():Boolean {

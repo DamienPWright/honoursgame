@@ -9,7 +9,7 @@ package
 		private var drawHitbox:Boolean = false;
 		private var parity:int = 0;
 		public var dealsDamage:Boolean = false;
-		private var attack:Attack
+		private var attack:Attack;
 		private var objList:FlxGroup = new FlxGroup();
 		
 		public function HitBox() 

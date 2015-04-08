@@ -52,7 +52,7 @@ package effects
 		}
 		
 		protected function initAnims():void {
-			addAnimation("n", attackFrames[0], 30, true);
+			addAnimation("n", attackFrames[0], 30, attackFramesLoop);
 			addAnimation("s", attackFrames[1], 30, attackFramesLoop);
 			addAnimation("e", attackFrames[2], 30, attackFramesLoop);
 			addAnimation("w", attackFrames[3], 30, attackFramesLoop);

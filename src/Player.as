@@ -45,5 +45,9 @@ package {
 		{
 			super.update();
 		}
+		
+		override public function destroy():void {
+			
+		}
 	}
 }

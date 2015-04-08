@@ -1,9 +1,7 @@
 package
 {
 	import attacks.Attack;
-	import enemies.Enemy;
-	import enemies.EnemyGiantSlime;
-	import enemies.EnemySlime;
+	import enemies.*;
 	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
@@ -39,6 +37,8 @@ package
 		public var bulletListSize:int = 20;
 		public var actorList:FlxGroup = new FlxGroup();
 		
+		public var hud:HUD;
+		
 		public var hitboxList:FlxGroup = new FlxGroup();
 		public var hitboxListSize:int = 50;
 		public var drawHitBoxes:Boolean = true; 
@@ -70,6 +70,7 @@ package
 			//trace(_xml);
 			//trace(tmx);
 			loadStateFromTmx(tmx);
+			hud = new HUD(player, this);
 		}
 		
 		override public function update():void
@@ -194,7 +195,7 @@ package
 			switch(obj.type)
 			{
 				case "player":
-					player = new Player(obj.x, obj.y);
+					player = GameManager.initPlayer(obj.x, obj.y);
 					return;
 				case "enemy":
 					//create enemy based on type.
