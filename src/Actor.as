@@ -18,6 +18,9 @@ package {
 		public var curHp:int;
 		public var attack:int;
 		
+		//sounds
+		public var onHitSound = SoundList.snd_combat_enemy_hit;
+		
 		public function Actor(startX:int, startY:int) {
 			super(startX, startY);
 			fsm = new FiniteStateMachine();
@@ -31,18 +34,22 @@ package {
 		public function getStateMachine():FiniteStateMachine {
 			return fsm;
 		}
+		
 		/**
 		 * Used when the actor is hit by something
 		 * @param	hb	The hitbox that collided with it.
 		 */
+		
 		public function onHit(hb:HitBox):void {
-			var dmg = hb.getAttack().getDamage();
+			var atk = hb.getAttack()
+			var dmg = atk.getDamage();
 			if (!hb.checkActorInObjectList(this)) {
 				dealDamage(dmg);
 			}
 			if(dmg > 0){
 				flicker(0.2);
 			}
+			var snd = FlxG.play(onHitSound);
 		}
 		
 		public override function update():void {
@@ -51,9 +58,8 @@ package {
 		}
 		
 		/**
-		 * Process damage recieved by the actor.
 		 * 
-		 * @param	damage
+		 * 
 		 */
 		
 		public function onDeath():void {
@@ -62,7 +68,12 @@ package {
 			kill();
 		}
 		 
-		 
+		/**
+		 * Process damage recieved by the actor.
+		 * 
+		 * @param	damage
+		 */
+		
 		public function dealDamage(damage:int) {
 			curHp -= damage; //For now. Later may add some checks for damage reduction via SEs, gear etc. 
 			//consider adding a damage indicator text. Green for negative damage, red for positive damage. "Guard!" for 0 damage. 

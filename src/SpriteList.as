@@ -24,6 +24,14 @@ package
 		//HUD
 		[Embed(source = "assets/img/hud_hpcontainer.png")] static public var sprite_hud_hpcontainer:Class;
 		[Embed(source = "assets/img/hud_hpbar.png")] static public var sprite_hud_hpbar:Class;
+		
+		//Items
+		[Embed(source = "assets/img/item_board.png")] static public var sprite_item_board:Class;
+		[Embed(source = "assets/img/item_heart.png")] static public var sprite_item_heart:Class;
+		[Embed(source = "assets/img/item_capsule_s.png")] static public var sprite_item_capsule_s:Class;
+		[Embed(source = "assets/img/item_capsule_m.png")] static public var sprite_item_capsule_m:Class;
+		[Embed(source = "assets/img/item_capsule_l.png")] static public var sprite_item_capsule_l:Class;
+	
 
 	}
 

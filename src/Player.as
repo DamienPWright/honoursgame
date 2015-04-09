@@ -39,6 +39,8 @@ package {
 			weapon = new Weapon(this);
 			//playerWalk = new PlayerWalk(this)
 			fsm.changeState(new PlayerIdle(this))
+			
+			onHitSound = SoundList.snd_combat_player_hit;
 		}
 		
 		override public function update():void

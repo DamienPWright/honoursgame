@@ -30,6 +30,7 @@ package
 			if(opened){
 				if ((FlxG.state as TmxLevel).checkHitboxActorOverlap(seekbox, (FlxG.state as TmxLevel).getPlayer())){
 					(FlxG.state as TmxLevel).triggerWarp(destination);
+					GameManager.goToNextLevel();
 				}
 			}
 		}

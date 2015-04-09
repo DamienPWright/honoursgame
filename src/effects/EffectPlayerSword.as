@@ -29,6 +29,9 @@ package effects
 				[ -1, -1, -1, -1, 0, -1, -1, -1]
 			]
 			
+			soundFrames = [0]
+			
+			soundArray = [SoundList.snd_combat_sword_slash]
 			initAnims();
 		}
 		

@@ -7,6 +7,8 @@ package effects {
 		protected var effectLifeSpanStart = 0;
 		protected var persistsOnActorDeath = false;
 		protected var actor:Actor;
+		protected var soundFrames:Array = [ -1];
+		protected var soundArray:Array;
 		
 		public function Effect() {
 			super(0, 0);
@@ -14,6 +16,12 @@ package effects {
 		
     	override public function update():void {
 			super.update();
+			
+			if (frameCount < soundFrames.length){
+				if(soundFrames[frameCount] != -1){
+					playSound(soundFrames[frameCount]);
+				}
+			}
 		}
 		
 		override public function postUpdate():void {
@@ -34,7 +42,11 @@ package effects {
 			effectLifeSpan = effectLifeSpanStart;
 			frameCount = 0;
 			kill();
-			trace("killed");
+		}
+		
+		protected function playSound(snd:int) {
+			trace("playSound");
+			var sound:FlxSound = FlxG.play(soundArray[snd]);
 		}
 	}
 }

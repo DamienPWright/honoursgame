@@ -16,7 +16,7 @@ package
 		public var scoreText:FlxText;
 		public var healthbarLength = 100;
 		public var healthbarPos:FlxPoint = new FlxPoint(0, 0); 
-		public var scoreCounterPos:FlxPoint = new FlxPoint (0, 0);
+		public var scoreCounterPos:FlxPoint = new FlxPoint (250, 0);
 		
 		public function HUD(_player:Player, _level:TmxLevel)
 		{
@@ -33,18 +33,25 @@ package
 			healthbar.loadGraphic(SpriteList.sprite_hud_hpbar);
 			healthbar.origin.x = healthbar.origin.y = 0;
 			
+			scoreText = new FlxText(camX + scoreCounterPos.x, camY + scoreCounterPos.y, 100);
+			
 			spriteContainer.add(healthbar);
+			spriteContainer.add(scoreText);
 			spriteContainer.add(new FlxSprite(camX + 0, camY + 0, SpriteList.sprite_hud_hpcontainer));
+			spriteContainer.add(new FlxText(camX + scoreCounterPos.x - 10, camY + scoreCounterPos.y + 10, 100, "Credits"));
 			spriteContainer.setAll("scrollFactor", new FlxPoint(0, 0));
+			
 			
 			visible = false;
 			
+			//level.add(scoreText);
 			level.add(this);
 			level.add(spriteContainer);
 		}
 		
 		public override function update():void {
 			healthbar.scale.x = (player.curHp / player.maxHp) * 1;
+			scoreText.text = GameManager.score.toString();
 		}
 	}
 

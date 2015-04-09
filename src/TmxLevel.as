@@ -2,6 +2,7 @@ package
 {
 	import attacks.Attack;
 	import enemies.*;
+	import items.*;
 	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
@@ -36,6 +37,9 @@ package
 		public var bulletList:FlxGroup = new FlxGroup();
 		public var bulletListSize:int = 20;
 		public var actorList:FlxGroup = new FlxGroup();
+		public var itemListSize:int = 50;
+		public var itemList:FlxGroup = new FlxGroup();
+		
 		
 		public var hud:HUD;
 		
@@ -77,6 +81,7 @@ package
 		{
 			//_fps.text = FlxU.floor(1/FlxG.elapsed).toString()+"fps";
 			super.update();
+			GameManager.update();
 			//if(FlxG.keys.justReleased("ENTER"))
 			//	FlxG.switchState(new TmxLevel());
 			FlxG.collide(colliders);
@@ -158,12 +163,20 @@ package
 				*/
 			}
 			
+			for (var i:int = 0; i < itemListSize; i++) {
+				/*
+				var newItem:Item = new Item(0,0);
+				newItem.exists = false;
+				itemList.add(newItem);
+				*/
+			}
+			
 			
 			add(hitboxList);
 			add(enemyList);
 			add(bulletList);
 			add(effectList);
-			
+			add(itemList);
 			
 			
 			//create the flixel implementation of the objects specified in the ObjectGroup 'objects'
@@ -201,8 +214,11 @@ package
 					//create enemy based on type.
 					enemyList.add(spawnEnemy(obj.name, obj.x, obj.y));
 					return;
+				case "item":
+					spawnItem(obj.name, obj.x, obj.y - 32);
+					return;
 				case "door":
-					exitDoor = new Door(obj.x, obj.y - 32, new TmxLevel(TmxList.level_03));
+					exitDoor = new Door(obj.x, obj.y - 32, new TmxLevel(GameManager.getNextLevel()));
 					add(exitDoor);
 					colliders.add(exitDoor);
 					return;
@@ -242,6 +258,33 @@ package
 			return newEnemy;
 		}
 		
+		public function spawnItem(itmtype:String, X:int, Y:int):void {
+			var newItem:Item;
+			
+			switch(itmtype) {
+				case "health":
+					newItem = (itemList.recycle(ItemHeart) as Item);
+					break;
+				case "res_sm":
+					newItem = (itemList.recycle(ItemResourceSmall) as Item);
+					break;
+				case "res_md":
+					newItem = (itemList.recycle(ItemResourceMedium) as Item);
+					break;
+				case "res_lg":
+					newItem = (itemList.recycle(ItemResourceLarge) as Item);
+					break;
+				case "res_cb":
+					newItem = (itemList.recycle(ItemResourceCircuitBoard) as Item);
+					break;
+			}
+			
+			if (newItem) {
+				newItem.exists = true;
+				newItem.setItem(X, Y);
+			}
+		}
+		
 		public function recycleEffect(img:Class = null, animated:Boolean = false, reverse:Boolean = false, frameWidth:int = 0, frameHeight:int = 0):Effect {
 			var newEffect = effectList.recycle(Effect);
 			newEffect.exists = true;
@@ -277,6 +320,10 @@ package
 		
 		public function checkHitboxActorOverlap(hb:HitBox, a:Actor):Boolean {
 			return FlxG.overlap(hb, a);
+		}
+		
+		public function checkItemActorOverlap(itm:Item, a:Actor):Boolean {
+			return FlxG.overlap(itm, a);
 		}
 		
 		public function hitboxActorCollideHandler(hb:HitBox, a:Actor):void {

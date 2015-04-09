@@ -31,7 +31,7 @@ package attacks
 		protected var attackFrame:int = 1;
 		protected var telegraphLength:int = 0;
 		
-		private var attackMod:Number = 1.0;
+		protected var attackMod:Number = 1.0;
 		
 		public function Attack(a:Actor) 
 		{

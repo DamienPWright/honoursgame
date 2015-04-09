@@ -4,7 +4,7 @@
   <image source="tileset2.png" width="640" height="640"/>
  </tileset>
  <tileset firstgid="401" name="ActorRep" tilewidth="32" tileheight="32">
-  <image source="../../src/assets/img/door.png" width="64" height="32"/>
+  <image source="../assets/img/door.png" width="64" height="32"/>
  </tileset>
  <layer name="map" width="12" height="12">
   <data encoding="base64" compression="zlib">
@@ -23,5 +23,10 @@
   <object name="slime" type="enemy" gid="2" x="102" y="128"/>
   <object name="slime" type="enemy" gid="2" x="258" y="123"/>
   <object name="slime" type="enemy" gid="2" x="177" y="301"/>
+  <object name="res_sm" type="item" gid="1" x="64" y="288"/>
+  <object name="res_md" type="item" gid="1" x="96" y="288"/>
+  <object name="res_lg" type="item" gid="1" x="96" y="320"/>
+  <object name="res_cb" type="item" gid="1" x="64" y="320"/>
+  <object name="health" type="item" gid="1" x="288" y="320"/>
  </objectgroup>
 </map>

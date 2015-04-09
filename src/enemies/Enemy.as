@@ -13,6 +13,8 @@ package enemies {
 			
 			fsm.changeState(new EnemyWander(this, target));
 			faction = "enemy";
+			
+			onHitSound = SoundList.snd_combat_enemy_hit;
 		}
 		
 		public override function update():void {

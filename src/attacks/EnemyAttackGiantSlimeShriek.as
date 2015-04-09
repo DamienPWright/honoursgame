@@ -38,6 +38,8 @@ package attacks
 			attackComplete = false;
 			//initAnims();
 			resetAnims();
+			
+			attackMod = 4.0;
 		}
 		
 		override public function update():void
@@ -52,13 +54,6 @@ package attacks
 		 * Use this function to fire any unique "on attack" effects gear might have.
 		 * @return	Damage that was dealt by the attack
 		 */
-		override public function getDamage():int {
-			return actor.attack;
-		}
-		
-		override public function getAttackComplete():Boolean {
-			return attackComplete;
-		}
 		
 		override public function resetAnims():void {
 			attackTimer = 0;

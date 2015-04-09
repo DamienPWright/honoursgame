@@ -14,6 +14,7 @@ package
 		{
 			super(320, 240, PlayStateTitle, 2);
 			forceDebugger = true;
+			FlxG.volume = 0.5;
 		}
 	}
 }
