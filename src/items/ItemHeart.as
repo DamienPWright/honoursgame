@@ -1,5 +1,6 @@
 package items 
 {
+	import org.flixel.*;
 	/**
 	 * ...
 	 * @author Raujinn
@@ -18,6 +19,15 @@ package items
 			loadGraphic(SpriteList.sprite_item_heart, true, false, 32, 32);
 			x = X;
 			y = Y;
+		}
+		
+		override public function onPickup():void {
+			GameManager.healPlayer(recoverAmount);
+			super.onPickup();
+		}
+		
+		override public function playSoundOnPickup():void {
+			var sound:FlxSound = FlxG.play(SoundList.snd_pickup_health);
 		}
 	}
 

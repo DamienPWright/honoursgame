@@ -1,5 +1,6 @@
 package items 
 {
+	import org.flixel.*;
 	/**
 	 * ...
 	 * @author Raujinn
@@ -18,6 +19,10 @@ package items
 			points = 75;
 			x = X;
 			y = Y;
+		}
+		
+		override public function playSoundOnPickup():void {
+			var sound:FlxSound = FlxG.play(SoundList.snd_pickup_resource_l);
 		}
 	}
 

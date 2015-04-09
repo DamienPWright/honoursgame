@@ -35,6 +35,7 @@ package {
 			playerMaxHp = player.maxHp;
 			return player;
 		}
+		
 		public static function respawnPlayer(reset:Boolean = false):void {
 			if(!reset){
 				player.x = playerMapStart.x;
@@ -48,11 +49,22 @@ package {
 			playerfsm.changeState(new PlayerIdle(player));
 		}
 		
+		public static function healPlayer(heal:int):void {
+			playerCurHp += heal;
+			trace("heal: " + heal);
+			trace("playerCurHp " + playerCurHp);
+			if (playerCurHp > playerMaxHp) {
+				playerCurHp = playerMaxHp;
+			}
+			player.curHp = playerCurHp;
+		}
+		
 		public static function updateScore(pts:int):void {
 			score += pts;
 		}
 		
 		public static function update():void {
+			playerCurHp = player.curHp;
 			//check if player dead
 			if (player.curHp <= 0) {
 				FlxG.switchState(new PlayStateGameOver());

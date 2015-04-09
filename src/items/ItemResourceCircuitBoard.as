@@ -1,5 +1,6 @@
 package items 
 {
+	import org.flixel.*;
 	/**
 	 * ...
 	 * @author Raujinn
