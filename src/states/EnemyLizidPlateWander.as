@@ -2,7 +2,7 @@ package states
 {
 	import enemies.Enemy;
 	import org.flixel.*;
-	public class EnemySlimeWander implements ActorState
+	public class EnemyLizidPlateWander implements ActorState
 	{
 		private var fsm:FiniteStateMachine;
 		private var self:Enemy;
@@ -16,7 +16,7 @@ package states
 		private var seekbox_size:int;
 		private var seekbox_pos:FlxPoint;
 		
-		public function EnemySlimeWander(e:Enemy) 
+		public function EnemyLizidPlateWander(e:Enemy) 
 		{
 			self = e;
 			fsm = self.getStateMachine();
@@ -68,7 +68,7 @@ package states
 			}
 			
 			if (wanderTimer > wanderTime) {
-				fsm.changeState(new EnemySlimeIdle(self));
+				fsm.changeState(new EnemyLizidPlateIdle(self));
 			}
 			self.play(anim);
 			
@@ -76,7 +76,7 @@ package states
 			seekbox.setHitBoxPos(self.getMidpoint().x - (seekbox_size / 2), self.getMidpoint().y - (seekbox_size / 2));
 			if ((FlxG.state as TmxLevel).checkHitboxActorOverlap(seekbox, (FlxG.state as TmxLevel).getPlayer())){
 				self.setTarget((FlxG.state as TmxLevel).getPlayer());
-				fsm.changeState(new EnemySlimePersue(self));
+				fsm.changeState(new EnemyLizidPlatePersue(self));
 			}
 		}
 		

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="48" height="32" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
+  <image source="../assets/img/tileset2.png" width="640" height="640"/>
+ </tileset>
+ <tileset firstgid="401" name="objTiles" tilewidth="32" tileheight="32">
+  <image source="../assets/img/tilesetObjects.png" width="640" height="640"/>
+ </tileset>
+ <layer name="map" width="48" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt19EJgDAMBNCg1BGUdgN1BvdfywZayE9R+tFr4B4ExPycigcVISLyZcnzlBFzvcIS/afZU2MXZf5nuD7295AU/Zgfa8+zNXYhzzEwS6/WN5j93Sv2DxbzY7F/sNg/WMyPpf1zlqk9FMw9D/1Tz1/1P47i5/ylPPenYn4s5seyHWrHQ3fO5AXvCQnq
+  </data>
+ </layer>
+ <layer name="floor" width="48" height="32">
+  <data encoding="base64" compression="zlib">
+   eJzt10EKgCAUhOE5WXkFqyvY/Y+QLiQDN4+gaWA+ePufEJ8BZmb2tWUyKlbM+xOxKcL9fFudfZjMzQlLeH77lVoTd9Y5hincnBD18+9+Pt8/XL5/eNz/H0rv/hnVfuX/r6b19h2WodmfcO8uxf6+wwo0+5XPv713AV15IPo=
+  </data>
+ </layer>
+ <objectgroup name="objects" width="48" height="32">
+  <object type="player" gid="401" x="544" y="928"/>
+  <object type="door" gid="424" x="544" y="224"/>
+  <object name="res_md" type="item" gid="406" x="640" y="480"/>
+  <object name="res_md" type="item" gid="406" x="448" y="672"/>
+  <object name="res_sm" type="item" gid="405" x="640" y="352"/>
+  <object name="res_sm" type="item" gid="405" x="448" y="736"/>
+  <object name="giantslime" type="enemy" gid="403" x="544" y="640"/>
+  <object name="slime" type="enemy" gid="402" x="480" y="704"/>
+  <object name="slime" type="enemy" gid="402" x="512" y="640"/>
+  <object name="slime" type="enemy" gid="402" x="480" y="576"/>
+  <object name="slime" type="enemy" gid="402" x="512" y="480"/>
+  <object name="slime" type="enemy" gid="402" x="576" y="480"/>
+  <object name="slime" type="enemy" gid="402" x="576" y="640"/>
+  <object name="slime" type="enemy" gid="402" x="512" y="736"/>
+  <object name="slime" type="enemy" gid="402" x="448" y="544"/>
+  <object name="slime" type="enemy" gid="402" x="576" y="704"/>
+  <object name="slime" type="enemy" gid="402" x="544" y="672"/>
+  <object name="slime" type="enemy" gid="402" x="608" y="576"/>
+  <object name="slime" type="enemy" gid="402" x="544" y="608"/>
+  <object name="health" type="item" gid="404" x="640" y="544"/>
+  <object name="giantslime" type="enemy" gid="403" x="512" y="512"/>
+  <object name="giantslime" type="enemy" gid="403" x="576" y="512"/>
+  <object name="giantslime" type="enemy" gid="403" x="608" y="320"/>
+  <object name="giantslime" type="enemy" gid="403" x="544" y="320"/>
+  <object name="giantslime" type="enemy" gid="403" x="480" y="320"/>
+  <object name="slime" type="enemy" gid="402" x="512" y="384"/>
+  <object name="slime" type="enemy" gid="402" x="576" y="384"/>
+  <object name="slime" type="enemy" gid="402" x="576" y="288"/>
+  <object name="slime" type="enemy" gid="402" x="512" y="288"/>
+  <object name="slime" type="enemy" gid="402" x="448" y="288"/>
+  <object name="slime" type="enemy" gid="402" x="640" y="288"/>
+  <object name="res_sm" type="item" gid="405" x="448" y="352"/>
+  <object name="res_lg" type="item" gid="407" x="480" y="256"/>
+  <object name="res_lg" type="item" gid="407" x="608" y="256"/>
+  <object name="slime" type="enemy" gid="402" x="544" y="608"/>
+  <object name="slime" type="enemy" gid="402" x="512" y="576"/>
+  <object name="slime" type="enemy" gid="402" x="576" y="576"/>
+  <object name="slime" type="enemy" gid="402" x="544" y="576"/>
+ </objectgroup>
+</map>

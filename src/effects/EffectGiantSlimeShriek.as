@@ -23,10 +23,14 @@ package effects
 			attackFrames = [
 				[9, 11, 13, 15],
 				[8, 10, 12, 14],
-				[0, 2, 4, 6],
 				[1, 3, 5, 7],
+				[0, 2, 4, 6],
 				[-1,-1,0,-1]
 			];
+			
+			soundFrames = [0]
+			
+			soundArray = [SoundList.snd_combat_giantslime_shriek]
 			
 			initAnims();
 		}

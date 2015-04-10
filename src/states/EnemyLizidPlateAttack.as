@@ -6,7 +6,7 @@ package states
 	 * ...
 	 * @author Raujinn
 	 */
-	public class EnemySlimeAttack implements ActorState 
+	public class EnemyLizidPlateAttack implements ActorState 
 	{
 		private var fsm:FiniteStateMachine;
 		private var self:Enemy;
@@ -14,11 +14,11 @@ package states
 		
 		private var attack:Attack;
 		
-		public function EnemySlimeAttack(e:Enemy) 
+		public function EnemyLizidPlateAttack(e:Enemy) 
 		{
 			self = e;
 			fsm = self.getStateMachine();
-			attack = new EnemyAttackSlimeSlap(self);
+			attack = new EnemyLizidPlateNibble(self);
 		}
 		
 		/* INTERFACE states.ActorState */
@@ -36,7 +36,7 @@ package states
 			if (attack.getAttackComplete()) {
 				//attack ends
 				attack.exit();
-				fsm.changeState(new EnemySlimePersue(self));
+				fsm.changeState(new EnemyLizidPlatePersue(self));
 			}
 		}
 		

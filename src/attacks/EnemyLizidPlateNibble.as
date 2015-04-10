@@ -6,40 +6,40 @@ package attacks
 	 * ...
 	 * @author Raujinn
 	 */
-	public class EnemyAttackGiantSlimeShriek extends Attack 
+	public class EnemyLizidPlateNibble extends Attack 
 	{
 		
 		
-		public function EnemyAttackGiantSlimeShriek(a:Actor) 
+		public function EnemyLizidPlateNibble(a:Actor) 
 		{
 			super(a);
 			effectsList = [
-				[EffectGiantSlimeShriek,SpriteList.sprite_eff_giantslime_shriek, true, false, 64, 64]
+				[EffectSlimeSlap,SpriteList.sprite_eff_slime_slap, true, false, 32, 32]
 			]
 			telegraphAnimLoop = false;
 			telegraphAnimFrames = [
-				[2],
-				[7],
-				[12],
-				[17],
+				[9],
+				[3],
+				[15],
+				[21],
 				[-1]
 			]
 			attackAnimFramesLoop = false;
 			attackAnimFrames = [
-				[3,3],
-				[8,8],
-				[13,13],
-				[18,18],
-				[0,-1]
+				[10,10,10,10,10,10,11],
+				[4,4,4,4,4,4,5],
+				[16,16,16,16,16,16,17],
+				[22,22,22,22,22,22,23],
+				[-1,0,-1,-1,-1,-1,-1]
 			]
 			attackTimer = 0;
 			attackEndTime = 90; //frames
-			telegraphLength = 45;
+			telegraphLength = 30;
 			attackComplete = false;
 			//initAnims();
 			resetAnims();
-			var snd:FlxSound = FlxG.play(SoundList.snd_combat_giantslime_charge);
-			attackMod = 4.0;
+			
+			attackMod = 10.0;
 		}
 		
 		override public function update():void

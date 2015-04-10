@@ -18,8 +18,9 @@ package
 			width = 1;
 			height = 1;
 			lifeSpanInFrames = 1;
-			drawHitbox = draw;
-			makeHitBox(drawHitbox);
+			visible = false;
+			//drawHitbox = draw;
+			//makeHitBox(drawHitbox);
 		}
 		
 		override public function update():void {

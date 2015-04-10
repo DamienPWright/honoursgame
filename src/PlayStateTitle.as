@@ -40,6 +40,7 @@ package
 			add(option2FlxText);
 			add(option3FlxText);
 			add(option4FlxText);
+			GameManager.score = 0;
 		}
 		
 		override public function update():void {

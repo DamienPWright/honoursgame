@@ -6,7 +6,7 @@ package states
 	 * ...
 	 * @author Raujinn
 	 */
-	public class EnemySlimePersue implements ActorState 
+	public class EnemyLizidPlatePersue implements ActorState 
 	{
 		private var fsm:FiniteStateMachine;
 		private var self:Enemy;
@@ -18,14 +18,14 @@ package states
 		
 		private var dir = 0;
 
-		public function EnemySlimePersue(e:Enemy) 
+		public function EnemyLizidPlatePersue(e:Enemy) 
 		{
 			self = e;
 			target = self.getTarget();
 			fsm = self.getStateMachine();
-			seekbox_size = 35;
+			seekbox_size = 50;
 			seekbox_pos = new FlxPoint(self.getMidpoint().x - (seekbox_size / 2), self.getMidpoint().y - (seekbox_size / 2));
-			seekbox = (FlxG.state as TmxLevel).createHitBox(self.x - seekbox_size / 4,  self.y - seekbox_size / 4, seekbox_size, seekbox_size, 1, 0);
+			seekbox = (FlxG.state as TmxLevel).createHitBox(seekbox_pos.x, seekbox_pos.y, seekbox_size, seekbox_size, 1, 0);
 		}
 		
 		/* INTERFACE states.ActorState */
@@ -39,8 +39,8 @@ package states
 		{
 			if(target != null){
 				dir = Math.atan2(target.y - self.y, target.x - self.x);
-				self.velocity.x = self.movespeed * Math.cos(dir) * 6;
-				self.velocity.y = self.movespeed * Math.sin(dir) * 6;
+				self.velocity.x = self.movespeed * Math.cos(dir) * 3;
+				self.velocity.y = self.movespeed * Math.sin(dir) * 3;
 			}
 
 			dir = dir / Math.PI + 1;
@@ -58,11 +58,11 @@ package states
 				self.currentFacing = FlxObject.UP;
 			}
 			//use a seekbox to determine if target is close enough
-			seekbox.setHitBoxPos(self.x - seekbox_size / 4,  self.y - seekbox_size / 4);
+			seekbox.setHitBoxPos(self.getMidpoint().x - (seekbox_size / 2), self.getMidpoint().y - (seekbox_size / 2));
 			
 			//if so, pick an attack
 			if ((FlxG.state as TmxLevel).checkHitboxActorOverlap(seekbox, target)){
-				fsm.changeState(new EnemySlimeAttack(self));
+				fsm.changeState(new EnemyLizidPlateAttack(self));
 			}
 		}
 		

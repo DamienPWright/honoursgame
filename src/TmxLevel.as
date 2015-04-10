@@ -22,6 +22,7 @@ package
 		[Embed(source="data/bg.png")] private var ImgBG:Class;
 		[Embed(source="data/gibs.png")] private var ImgGibs:Class;
 		
+		
 		protected var _fps:FlxText = new FlxText(1,1,1);
 		public var player:Player;
 		public var tilemap:FlxTilemap;
@@ -31,7 +32,7 @@ package
 		public var collidesWithAll:FlxGroup = new FlxGroup();
 		
 		public var enemyList:FlxGroup = new FlxGroup();
-		public var enemyListSize:int = 50; // raise this limit if theres a type of quest that warrants it.
+		public var enemyListSize:int = 100; // raise this limit if theres a type of quest that warrants it.
 		public var effectList:FlxGroup = new FlxGroup();
 		public var effectListSize:int = 50;
 		public var bulletList:FlxGroup = new FlxGroup();
@@ -193,9 +194,9 @@ package
 			
 			
 			//give enemies a reference to the player.. think of a better way to do this later
-			//for each(var enemy:Enemy in enemyList) {
-			//	enemy.setTarget(player);
-			//}
+			for each(var enemy:Enemy in enemyList) {
+				enemy.setTarget(player);
+			}
 			
 			//camera
 			FlxG.camera.follow(player, FlxCamera.STYLE_TOPDOWN_TIGHT);
@@ -208,11 +209,11 @@ package
 			switch(obj.type)
 			{
 				case "player":
-					player = GameManager.initPlayer(obj.x, obj.y);
+					player = GameManager.initPlayer(obj.x, obj.y - 32);
 					return;
 				case "enemy":
 					//create enemy based on type.
-					enemyList.add(spawnEnemy(obj.name, obj.x, obj.y));
+					enemyList.add(spawnEnemy(obj.name, obj.x, obj.y - 32));
 					return;
 				case "item":
 					spawnItem(obj.name, obj.x, obj.y - 32);
@@ -253,6 +254,9 @@ package
 				case "slime":
 					newEnemy = new EnemySlime(X, Y, player);
 					break;
+				case "giantlizid":
+					newEnemy = new EnemyLizidPlate(X, Y, player);
+					break;
 			}
 			
 			return newEnemy;
@@ -278,6 +282,15 @@ package
 					newItem = (itemList.recycle(ItemResourceCircuitBoard) as Item);
 					break;
 			}
+			
+			if (newItem) {
+				newItem.exists = true;
+				newItem.setItem(X, Y);
+			}
+		}
+		
+		public function spawnItemFromClass(itm:Class, X:int, Y:int) {
+			var newItem:Item = (itemList.recycle(itm) as Item);
 			
 			if (newItem) {
 				newItem.exists = true;

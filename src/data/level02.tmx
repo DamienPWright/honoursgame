@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="48" height="32" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
+  <image source="../assets/img/tileset2.png" width="640" height="640"/>
+ </tileset>
+ <tileset firstgid="401" name="objTiles" tilewidth="32" tileheight="32">
+  <image source="../assets/img/tilesetObjects.png" width="640" height="640"/>
+ </tileset>
+ <layer name="map" width="48" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztlm8KgCAMxaWwIxR1g/IM3v9aGSQscyr5h6L3g/fBTbbHQJwQAICv0xnpTPWklgjka7AVqKEitRQTLwH8w38Oo9FqNJCYPGNUofzE1JJOviZ0dr55xfK+uzXnzvXk+sJ/XeD/fhf+0zj2loWcZ3HdabQnH9prWvv3/TuxP4ne4erBfxp/9W/fgSv7Vt7uPwb8pxHyb3fKJ2qxd3IeW/UGAICvsQPb3Rq1
+  </data>
+ </layer>
+ <layer name="floor" width="48" height="32">
+  <data encoding="base64" compression="zlib">
+   eJztl20KgCAQRPdk5RUsr1D3P0IJSevm9klrwTyYX7PUQwONCAAA6tM8DKdf4pX+DcLDcJJzS3b+fC07WtdQxit96VmW/tzPkf6dtErPqeGfSH53ezlrDfzzWWvgn89aA/981po/+8vzSXal82sP+F8j3sOGOSNt72SB9Y6+6X/mThPjlBnJV/3T/hxlMLEuO+753/2veZua7wYAAGDHBDQmN38=
+  </data>
+ </layer>
+ <objectgroup name="objects" width="48" height="32">
+  <object type="player" gid="401" x="224" y="736"/>
+  <object type="door" gid="424" x="704" y="192"/>
+  <object name="res_md" type="item" gid="406" x="128" y="608"/>
+  <object name="res_md" type="item" gid="406" x="224" y="608"/>
+  <object name="res_sm" type="item" gid="405" x="576" y="224"/>
+  <object name="res_sm" type="item" gid="405" x="96" y="224"/>
+  <object name="giantslime" type="enemy" gid="403" x="352" y="736"/>
+  <object name="slime" type="enemy" gid="402" x="160" y="480"/>
+  <object name="slime" type="enemy" gid="402" x="192" y="352"/>
+  <object name="slime" type="enemy" gid="402" x="480" y="288"/>
+  <object name="slime" type="enemy" gid="402" x="416" y="256"/>
+  <object name="slime" type="enemy" gid="402" x="512" y="256"/>
+  <object name="slime" type="enemy" gid="402" x="352" y="320"/>
+  <object name="slime" type="enemy" gid="402" x="320" y="256"/>
+  <object name="slime" type="enemy" gid="402" x="448" y="544"/>
+  <object name="slime" type="enemy" gid="402" x="768" y="576"/>
+  <object name="slime" type="enemy" gid="402" x="768" y="416"/>
+  <object name="slime" type="enemy" gid="402" x="736" y="256"/>
+  <object name="slime" type="enemy" gid="402" x="800" y="288"/>
+  <object name="health" type="item" gid="404" x="832" y="224"/>
+ </objectgroup>
+</map>

@@ -11,11 +11,13 @@ package
 		//effects
 		[Embed(source = "assets/img/eff_sword_slash.png")] static public var sprite_eff_sword_slash:Class;
 		[Embed(source = "assets/img/eff_giantslime_shriek.png")] static public var sprite_eff_giantslime_shriek:Class;
+		[Embed(source = "assets/img/eff_slime_slap.png")] static public var sprite_eff_slime_slap:Class;
 		
 		//enemies
 		[Embed(source = "assets/img/sprite_en_giantslime.png")] static public var sprite_en_giantslime:Class;
 		[Embed(source = "assets/img/sprite_en_slime.png")] static public var sprite_en_slime:Class;
 		[Embed(source = "assets/img/sprite_en_lizid.png")] static public var sprite_en_lizid:Class;
+		[Embed(source = "assets/img/sprite_en_giantlizid.png")] static public var sprite_en_lizid_plate:Class;
 		[Embed(source = "assets/img/sprite_en_tachibot.png")] static public var sprite_en_tachibot:Class;
 		
 		//furniture

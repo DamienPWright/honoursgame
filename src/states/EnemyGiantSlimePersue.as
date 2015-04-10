@@ -40,8 +40,8 @@ package states
 		{
 			if(target != null){
 				dir = Math.atan2(target.y - self.y, target.x - self.x);
-				self.velocity.x = self.movespeed * Math.cos(dir);
-				self.velocity.y = self.movespeed * Math.sin(dir);
+				self.velocity.x = self.movespeed * Math.cos(dir) * 2;
+				self.velocity.y = self.movespeed * Math.sin(dir) * 2;
 			}
 
 			dir = dir / Math.PI + 1;

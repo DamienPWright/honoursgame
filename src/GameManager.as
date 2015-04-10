@@ -11,6 +11,8 @@ package {
 		public static var nextLevel:int = 0;
 		
 		public static var score = 0;
+		public static var scoreThisLevel = 0;
+		public static var totalScore = 0;
 		
 		public static function getNextLevel():Class {
 			nextLevel = curLevelXml + 1;
@@ -23,7 +25,13 @@ package {
 		}
 		
 		public static function goToNextLevel():void {
-			curLevelXml = nextLevel;
+			if (nextLevel >= TmxList.levels.length) {
+				//game complete!
+				FlxG.switchState(new PlayStateGameClear);
+			}else {
+				curLevelXml = nextLevel;
+			}
+			scoreThisLevel = 0;
 		}
 		
 		public static function initPlayer(x, y){
@@ -41,12 +49,13 @@ package {
 				player.x = playerMapStart.x;
 				player.y = playerMapStart.y;
 				FlxG.switchState(new TmxLevel(TmxList.levels[curLevelXml]));
-				
 			}
 			player.curHp = playerMaxHp;
 			player.exists = true;
 			var playerfsm = player.getStateMachine();
 			playerfsm.changeState(new PlayerIdle(player));
+			//reset score to start of level
+			score -= scoreThisLevel;
 		}
 		
 		public static function healPlayer(heal:int):void {
@@ -61,6 +70,7 @@ package {
 		
 		public static function updateScore(pts:int):void {
 			score += pts;
+			scoreThisLevel += pts;
 		}
 		
 		public static function update():void {

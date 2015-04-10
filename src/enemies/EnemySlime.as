@@ -3,7 +3,7 @@ package enemies {
 	import org.flixel.*;
 	public class EnemySlime extends Enemy {
 		
-		private var target:Actor;
+		//private var target:Actor;
 		
 		public function EnemySlime(X:int, Y:int, t:Actor) {
 			super(X, Y, target);
